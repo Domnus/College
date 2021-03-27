@@ -5,29 +5,76 @@ import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
 
 public class Operador {
-    public void operador() throws FileNotFoundException {
+    public boolean operador(int numEts) throws FileNotFoundException {
+        Scanner scan = new Scanner(System.in);
         Etiqueta et = new Etiqueta();
-        String x;
-        et.writeMaquina(JOptionPane.showInputDialog("Digite o nome da máquina: "));
-        et.writeLinha(Integer.parseInt(JOptionPane.showInputDialog("Informe a linha: [1-6]")));
-        et.writePrioridade(JOptionPane.showInputDialog("Informe a prioridade: [Baixa/Média/Alta]"));
-        x = JOptionPane.showInputDialog("Houve parada? [S/N]");
-        et.writeParada(x.toUpperCase().equals("S"));
-        et.writeData(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
-        et.writeHorario(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
-        et.writeDescricao(JOptionPane.showInputDialog("Informe a descrição da etiqueta: "));
-        et.writeOperador(JOptionPane.showInputDialog("Nome do operador: "));
+        String maquina, parada, prioridade, descricao, operador;
+        int linha;
+        char firstChar;
 
-        try {
-            FileOutputStream fout = new FileOutputStream("etiqueta.txt");
-            ObjectOutputStream oos = new ObjectOutputStream(fout);
-            oos.writeObject(et);
-            oos.close();
-            JOptionPane.showMessageDialog(null,"Etiqueta criada com sucesso!");
-        } catch (IOException e) {
-            JOptionPane.showMessageDialog(null,"Não foi possível criar a etiqueta!");
+        while (true)
+        {
+            System.out.print("Nome da máquina: ");
+            maquina= scan.nextLine();
+            et.setMaquina(maquina);
+
+
+
+            System.out.print("Linha [1-6]: ");
+            if (scan.hasNextInt()){
+                linha = scan.nextInt();
+                if (linha >= 1 && linha <= 6){
+                    et.setLinha(linha);
+                } else {
+                    System.out.println("Digite um número de 1 a 6!");
+                    break;
+                }
+            } else {
+                System.out.println("Digite um número!");
+                break;
+            }
+
+            scan.nextLine();
+
+            /*
+
+            System.out.print("Prioridade [Baixa/Média/Alta]: ");
+            prioridade = scan.nextLine();
+            et.setPrioridade(prioridade);
+
+            System.out.print("Houve parada? [S/N]: ");
+            parada = scan.nextLine();
+            firstChar = parada.charAt(0);
+            et.setParada(firstChar == 'S');
+
+            et.setData(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
+            et.setHorario(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+
+            System.out.print("Descrição: ");
+            descricao = scan.nextLine();
+            et.setDescricao(descricao);
+
+            System.out.print("Operador: ");
+            operador = scan.nextLine();
+            et.setOperador(operador);
+
+             */
+
+
+            try {
+                FileOutputStream fout = new FileOutputStream("etiqueta" + numEts + ".ser");
+                ObjectOutputStream oos = new ObjectOutputStream(fout);
+                oos.writeObject(et);
+                fout.close();
+                oos.close();
+                return true;
+            } catch (IOException e) {
+                return false;
+            }
         }
+        return false;
     }
 }
