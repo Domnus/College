@@ -1,6 +1,5 @@
 package Hackaton;
 
-import javax.swing.*;
 import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -21,8 +20,6 @@ public class Operador {
             maquina= scan.nextLine();
             et.setMaquina(maquina);
 
-
-
             System.out.print("Linha [1-6]: ");
             if (scan.hasNextInt()){
                 linha = scan.nextInt();
@@ -38,8 +35,6 @@ public class Operador {
             }
 
             scan.nextLine();
-
-            /*
 
             System.out.print("Prioridade [Baixa/Média/Alta]: ");
             prioridade = scan.nextLine();
@@ -60,9 +55,6 @@ public class Operador {
             System.out.print("Operador: ");
             operador = scan.nextLine();
             et.setOperador(operador);
-
-             */
-
 
             try {
                 FileOutputStream fout = new FileOutputStream("etiqueta" + numEts + ".ser");
