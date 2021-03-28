@@ -35,5 +35,11 @@ public class Gerente {
             System.out.println("%");
         }
         System.out.println("----------------------------------------------------------");
+
+        MediaProblemas mediaProblemas = new MediaProblemas();
+        float media = mediaProblemas.media(etiquetas, numEts);
+
+        System.out.format("Média de problemas por dia: %.2f\n", media);
+        System.out.println("----------------------------------------------------------");
     }
 }

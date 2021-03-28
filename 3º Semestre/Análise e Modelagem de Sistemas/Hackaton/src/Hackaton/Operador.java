@@ -45,8 +45,14 @@ public class Operador {
             firstChar = parada.charAt(0);
             et.setParada(firstChar == 'S');
 
+            et.setData(scan.nextLine());
+
+            /*
+
             et.setData(LocalDate.now().format(DateTimeFormatter.ofPattern("dd-MM-yyyy")));
             et.setHorario(LocalTime.now().format(DateTimeFormatter.ofPattern("HH:mm:ss")));
+
+             */
 
             System.out.print("Descrição: ");
             descricao = scan.nextLine();
