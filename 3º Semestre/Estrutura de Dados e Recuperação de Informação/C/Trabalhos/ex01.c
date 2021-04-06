@@ -41,6 +41,17 @@ void Ins_Fim(NO **Inicio, NO **Fim, int v){
     *Fim = p;
 }
 
+void imprime(NO *Inicio){
+    NO *p = Inicio;
+
+    while (p != NULL){
+        printf("%d --> ", p->info);
+        p = p -> prox;
+    }
+    printf("NULL\n");
+}
+
+
 int Rem_Inicio(NO **Inicio, NO **Fim, int *v){
     NO *p;
 
@@ -100,14 +111,24 @@ NO * Consulta(NO *Inicio, int v){
     return p;
 }
 
-void imprime(NO *Inicio){
-    NO *p = Inicio;
+int moveInicio(NO **Inicio, NO **Fim, int v){
+    NO *p = *Inicio;
+    NO *r;
 
-    while (p != NULL){
-        printf("%d --> ", p->info);
-        p = p -> prox;
+    if (Consulta(*Inicio, v)){
+        while (p != NULL && p -> info != v){
+            r = p;
+            p = p -> prox;
+        }
+        r -> prox =  p -> prox; 
+        p -> prox = (*Inicio) -> prox;
+        *Inicio = p;
+
+    } else {
+        return 0;
     }
-    printf("NULL\n");
+
+    return 1;
 }
 
 int main(){
@@ -118,7 +139,6 @@ int main(){
 
     do {
 
-        system("clear");
         puts("1 - Inserir no Início");
         puts("2 - Inserir no Fim");
         puts("3 - Imprimir a lista");
@@ -193,7 +213,29 @@ int main(){
             getchar();
 
             break;
-       }
+        
+            case 7:
+                printf("Digite o valora para mudar para o Inicio da lista: ");
+                scanf("%d", &val);
+
+                if (moveInicio(&Inicio, &Fim, val)){
+                    printf("Valor %d mudado para o começo da lista!", val);
+                } else {
+                    printf("Não foi possível mover o valor!");
+                }
+
+                getchar();
+                getchar();
+
+                break;
+
+            case 8:
+                printf("Digite o valora para mudar para o Inicio da lista: ");
+                scanf("%d", &val);
+
+
+                break;
+        }
 
     } while (op != 0);
 
