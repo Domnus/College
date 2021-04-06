@@ -1,0 +1,3 @@
+/home/bentocarlos/Documents/Github/College/3º Semestre/Estrutura de Dados e Recuperação de Informação/C/Lista Simplesmente Encadeada/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/home/bentocarlos/Documents/Github/College/3º Semestre/Estrutura de Dados e Recuperação de Informação/C/Lista Simplesmente Encadeada/cmake-build-debug/CMakeFiles/edit_cache.dir
+/home/bentocarlos/Documents/Github/College/3º Semestre/Estrutura de Dados e Recuperação de Informação/C/Lista Simplesmente Encadeada/cmake-build-debug/CMakeFiles/C.dir
