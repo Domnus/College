@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 struct dados
 {
@@ -113,22 +114,68 @@ NO * Consulta(NO *Inicio, int v){
 
 int moveInicio(NO **Inicio, NO **Fim, int v){
     NO *p = *Inicio;
+    NO *r = (NO *) calloc(1, sizeof(NO));
+
+    if (Consulta(*Inicio, v)){
+        if ((*Fim) -> info == v){
+            while (p != NULL && p -> info != v){
+                r = p;
+                p = p -> prox;
+            }
+
+            (*Fim) = r;
+            (*Fim) -> prox = NULL;
+        } else {
+            while (p != NULL && p -> info != v){
+                r = p;
+                p = p -> prox;
+            }
+            r -> prox =  p -> prox;
+        }
+            p -> prox = (*Inicio);
+            (*Inicio) = p;
+    } else {
+        return 0;
+    }
+    return 1;
+}
+
+int moveFim(NO **Inicio, NO **Fim, int v){
+    NO *p = *Inicio;
     NO *r;
 
     if (Consulta(*Inicio, v)){
-        while (p != NULL && p -> info != v){
-            r = p;
-            p = p -> prox;
+        if ((*Inicio) -> info == v){
+            (*Inicio) = (*Inicio) -> prox;
+            (*Fim) -> prox = p;
+            p -> prox = NULL;
+        } else {
+            while (p -> info != v){
+                r = p;
+                p = p -> prox;
+            }
+            r -> prox = p -> prox;
+            p -> prox = NULL;
+            (*Fim) -> prox = p;
+            (*Fim) = p;
         }
-        r -> prox =  p -> prox; 
-        p -> prox = (*Inicio) -> prox;
-        *Inicio = p;
-
     } else {
         return 0;
     }
 
     return 1;
+}
+
+int contaLista(NO *Inicio){
+    NO *p = Inicio;
+    int contador = 0;
+
+    while (p != NULL){
+        contador++;
+        p = p -> prox;
+    }
+
+    return contador;
 }
 
 int main(){
@@ -138,6 +185,7 @@ int main(){
     cria_LSE(&Inicio, &Fim);
 
     do {
+        system("clear");
 
         puts("1 - Inserir no Início");
         puts("2 - Inserir no Fim");
@@ -215,13 +263,17 @@ int main(){
             break;
         
             case 7:
-                printf("Digite o valora para mudar para o Inicio da lista: ");
-                scanf("%d", &val);
+                if (contaLista(Inicio) >= 3){
+                    printf("Digite o valora para mudar para o Inicio da lista: ");
+                    scanf("%d", &val);
 
-                if (moveInicio(&Inicio, &Fim, val)){
-                    printf("Valor %d mudado para o começo da lista!", val);
+                    if (moveInicio(&Inicio, &Fim, val)){
+                        printf("Valor %d mudado para o começo da lista!", val);
+                    } else {
+                        printf("Não foi possível mover o valor!");
+                    }
                 } else {
-                    printf("Não foi possível mover o valor!");
+                    printf("A lista tem menos de 3 elementos!");
                 }
 
                 getchar();
@@ -230,9 +282,21 @@ int main(){
                 break;
 
             case 8:
-                printf("Digite o valora para mudar para o Inicio da lista: ");
-                scanf("%d", &val);
+                if (contaLista(Inicio) >= 3){
+                    printf("Digite o valora para mudar para o Fim da lista: ");
+                    scanf("%d", &val);
 
+                    if (moveFim(&Inicio, &Fim, val)){
+                        printf("Valor %d mudado para o fim da lista!", val);
+                    } else {
+                        printf("Não foi possível mover o valor!");
+                    }
+                } else {
+                    printf("A lista tem menos de 3 elementos!");
+                }
+
+                getchar();
+                getchar();
 
                 break;
         }
