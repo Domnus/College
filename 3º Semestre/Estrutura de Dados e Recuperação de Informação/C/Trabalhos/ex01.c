@@ -52,7 +52,6 @@ void imprime(NO *Inicio){
     printf("NULL\n");
 }
 
-
 int Rem_Inicio(NO **Inicio, NO **Fim, int *v){
     NO *p;
 
@@ -85,7 +84,7 @@ int Rem_Fim(NO **Inicio, NO **Fim, int *v){
 
         if (p == *Inicio){
             *Inicio = NULL;
-            *Fim == NULL;
+            *Fim = NULL;
         } else {
             q = *Inicio;
 
@@ -117,23 +116,27 @@ int moveInicio(NO **Inicio, NO **Fim, int v){
     NO *r = (NO *) calloc(1, sizeof(NO));
 
     if (Consulta(*Inicio, v)){
-        if ((*Fim) -> info == v){
-            while (p != NULL && p -> info != v){
-                r = p;
-                p = p -> prox;
-            }
-
-            (*Fim) = r;
-            (*Fim) -> prox = NULL;
+        if ((*Inicio) -> info == v){
+            return 0;
         } else {
-            while (p != NULL && p -> info != v){
-                r = p;
-                p = p -> prox;
+            if ((*Fim) -> info == v){
+                while (p != NULL && p -> info != v){
+                    r = p;
+                    p = p -> prox;
+                }
+
+                (*Fim) = r;
+                (*Fim) -> prox = NULL;
+            } else {
+                while (p != NULL && p -> info != v){
+                    r = p;
+                    p = p -> prox;
+                }
+                r -> prox =  p -> prox;
             }
-            r -> prox =  p -> prox;
+                p -> prox = (*Inicio);
+                (*Inicio) = p;
         }
-            p -> prox = (*Inicio);
-            (*Inicio) = p;
     } else {
         return 0;
     }
@@ -145,19 +148,23 @@ int moveFim(NO **Inicio, NO **Fim, int v){
     NO *r;
 
     if (Consulta(*Inicio, v)){
-        if ((*Inicio) -> info == v){
-            (*Inicio) = (*Inicio) -> prox;
-            (*Fim) -> prox = p;
-            p -> prox = NULL;
+        if ((*Fim) -> info == v){
+            return 0;
         } else {
-            while (p -> info != v){
-                r = p;
-                p = p -> prox;
+            if ((*Inicio) -> info == v){
+                (*Inicio) = (*Inicio) -> prox;
+                (*Fim) -> prox = p;
+                p -> prox = NULL;
+            } else {
+                while (p -> info != v){
+                    r = p;
+                    p = p -> prox;
+                }
+                r -> prox = p -> prox;
+                p -> prox = NULL;
+                (*Fim) -> prox = p;
+                (*Fim) = p;
             }
-            r -> prox = p -> prox;
-            p -> prox = NULL;
-            (*Fim) -> prox = p;
-            (*Fim) = p;
         }
     } else {
         return 0;
@@ -246,21 +253,21 @@ int main(){
                 break;
             
             case 6:
-            printf("\nDigite o valor a procurar: ");
-            scanf("%d", &val);
+                printf("\nDigite o valor a procurar: ");
+                scanf("%d", &val);
 
-            r = Consulta(Inicio, val);
+                r = Consulta(Inicio, val);
 
-            if (r == NULL){
-                printf("\nValor não existe na lista!");
-            } else {
-                printf("\nValor encontrado: %d", r->info);
-            }
+                if (r == NULL){
+                    printf("\nValor não existe na lista!");
+                } else {
+                    printf("\nValor encontrado: %d", r->info);
+                }
 
-            getchar();
-            getchar();
+                getchar();
+                getchar();
 
-            break;
+                break;
         
             case 7:
                 if (contaLista(Inicio) >= 3){
@@ -302,7 +309,6 @@ int main(){
         }
 
     } while (op != 0);
-
 
     return 0;
 }
