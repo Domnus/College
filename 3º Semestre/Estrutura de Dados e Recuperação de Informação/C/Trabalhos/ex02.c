@@ -85,7 +85,7 @@ void Rem_Dup(NO **Inicio)
             q = r -> dir;
 
             if (p -> info == r -> info) {
-                (r -> esq -> dir = q;
+                (r -> esq) -> dir = q;
                 free(r);
 
                 r = q;
