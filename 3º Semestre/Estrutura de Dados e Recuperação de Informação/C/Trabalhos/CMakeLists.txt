@@ -4,4 +4,4 @@ project(Trabalhos C)
 set(CMAKE_C_STANDARD 11)
 
 add_executable(Trabalhos
-        ex01.c)
+        ex02.c)

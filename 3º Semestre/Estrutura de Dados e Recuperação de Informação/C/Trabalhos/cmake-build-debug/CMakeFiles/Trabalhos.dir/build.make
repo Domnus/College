@@ -77,27 +77,27 @@ include CMakeFiles/Trabalhos.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/Trabalhos.dir/flags.make
 
-CMakeFiles/Trabalhos.dir/ex01.c.o: CMakeFiles/Trabalhos.dir/flags.make
-CMakeFiles/Trabalhos.dir/ex01.c.o: ../ex01.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/bentocarlos/Documents/Github/College/3º Semestre/Estrutura de Dados e Recuperação de Informação/C/Trabalhos/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/Trabalhos.dir/ex01.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Trabalhos.dir/ex01.c.o   -c "/home/bentocarlos/Documents/Github/College/3º Semestre/Estrutura de Dados e Recuperação de Informação/C/Trabalhos/ex01.c"
+CMakeFiles/Trabalhos.dir/ex02.c.o: CMakeFiles/Trabalhos.dir/flags.make
+CMakeFiles/Trabalhos.dir/ex02.c.o: ../ex02.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir="/home/bentocarlos/Documents/Github/College/3º Semestre/Estrutura de Dados e Recuperação de Informação/C/Trabalhos/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/Trabalhos.dir/ex02.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/Trabalhos.dir/ex02.c.o   -c "/home/bentocarlos/Documents/Github/College/3º Semestre/Estrutura de Dados e Recuperação de Informação/C/Trabalhos/ex02.c"
 
-CMakeFiles/Trabalhos.dir/ex01.c.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Trabalhos.dir/ex01.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/home/bentocarlos/Documents/Github/College/3º Semestre/Estrutura de Dados e Recuperação de Informação/C/Trabalhos/ex01.c" > CMakeFiles/Trabalhos.dir/ex01.c.i
+CMakeFiles/Trabalhos.dir/ex02.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/Trabalhos.dir/ex02.c.i"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E "/home/bentocarlos/Documents/Github/College/3º Semestre/Estrutura de Dados e Recuperação de Informação/C/Trabalhos/ex02.c" > CMakeFiles/Trabalhos.dir/ex02.c.i
 
-CMakeFiles/Trabalhos.dir/ex01.c.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Trabalhos.dir/ex01.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/home/bentocarlos/Documents/Github/College/3º Semestre/Estrutura de Dados e Recuperação de Informação/C/Trabalhos/ex01.c" -o CMakeFiles/Trabalhos.dir/ex01.c.s
+CMakeFiles/Trabalhos.dir/ex02.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/Trabalhos.dir/ex02.c.s"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S "/home/bentocarlos/Documents/Github/College/3º Semestre/Estrutura de Dados e Recuperação de Informação/C/Trabalhos/ex02.c" -o CMakeFiles/Trabalhos.dir/ex02.c.s
 
 # Object files for target Trabalhos
 Trabalhos_OBJECTS = \
-"CMakeFiles/Trabalhos.dir/ex01.c.o"
+"CMakeFiles/Trabalhos.dir/ex02.c.o"
 
 # External object files for target Trabalhos
 Trabalhos_EXTERNAL_OBJECTS =
 
-Trabalhos: CMakeFiles/Trabalhos.dir/ex01.c.o
+Trabalhos: CMakeFiles/Trabalhos.dir/ex02.c.o
 Trabalhos: CMakeFiles/Trabalhos.dir/build.make
 Trabalhos: CMakeFiles/Trabalhos.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir="/home/bentocarlos/Documents/Github/College/3º Semestre/Estrutura de Dados e Recuperação de Informação/C/Trabalhos/cmake-build-debug/CMakeFiles" --progress-num=$(CMAKE_PROGRESS_2) "Linking C executable Trabalhos"

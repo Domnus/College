@@ -143,32 +143,32 @@ Trabalhos/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Trabalhos.dir/build.make CMakeFiles/Trabalhos.dir/build
 .PHONY : Trabalhos/fast
 
-ex01.o: ex01.c.o
+ex02.o: ex02.c.o
 
-.PHONY : ex01.o
+.PHONY : ex02.o
 
 # target to build an object file
-ex01.c.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Trabalhos.dir/build.make CMakeFiles/Trabalhos.dir/ex01.c.o
-.PHONY : ex01.c.o
+ex02.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Trabalhos.dir/build.make CMakeFiles/Trabalhos.dir/ex02.c.o
+.PHONY : ex02.c.o
 
-ex01.i: ex01.c.i
+ex02.i: ex02.c.i
 
-.PHONY : ex01.i
+.PHONY : ex02.i
 
 # target to preprocess a source file
-ex01.c.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Trabalhos.dir/build.make CMakeFiles/Trabalhos.dir/ex01.c.i
-.PHONY : ex01.c.i
+ex02.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Trabalhos.dir/build.make CMakeFiles/Trabalhos.dir/ex02.c.i
+.PHONY : ex02.c.i
 
-ex01.s: ex01.c.s
+ex02.s: ex02.c.s
 
-.PHONY : ex01.s
+.PHONY : ex02.s
 
 # target to generate assembly for a file
-ex01.c.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Trabalhos.dir/build.make CMakeFiles/Trabalhos.dir/ex01.c.s
-.PHONY : ex01.c.s
+ex02.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Trabalhos.dir/build.make CMakeFiles/Trabalhos.dir/ex02.c.s
+.PHONY : ex02.c.s
 
 # Help Target
 help:
@@ -179,9 +179,9 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... Trabalhos"
-	@echo "... ex01.o"
-	@echo "... ex01.i"
-	@echo "... ex01.s"
+	@echo "... ex02.o"
+	@echo "... ex02.i"
+	@echo "... ex02.s"
 .PHONY : help
 
 

@@ -1,1 +1,1 @@
-/usr/bin/cc -g   CMakeFiles/Trabalhos.dir/ex01.c.o  -o Trabalhos 
+/usr/bin/cc -g   CMakeFiles/Trabalhos.dir/ex02.c.o  -o Trabalhos 

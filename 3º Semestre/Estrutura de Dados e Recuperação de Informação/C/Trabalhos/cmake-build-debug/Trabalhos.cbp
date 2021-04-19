@@ -74,7 +74,7 @@
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="/home/bentocarlos/Documents/Github/College/3º Semestre/Estrutura de Dados e Recuperação de Informação/C/Trabalhos/ex01.c">
+		<Unit filename="/home/bentocarlos/Documents/Github/College/3º Semestre/Estrutura de Dados e Recuperação de Informação/C/Trabalhos/ex02.c">
 			<Option target="Trabalhos"/>
 		</Unit>
 		<Unit filename="/home/bentocarlos/Documents/Github/College/3º Semestre/Estrutura de Dados e Recuperação de Informação/C/Trabalhos/CMakeLists.txt">
