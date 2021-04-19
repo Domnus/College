@@ -83,7 +83,11 @@ public class ex01 {
             op = JOptionPane.showInputDialog(null, "Escolha uma opção", "Agenda", JOptionPane.QUESTION_MESSAGE, null, menu, menu[0]).toString();
 
             switch (op) {
+<<<<<<< HEAD
                 case "Cadastrar":
+=======
+                case "Cadastrar": 
+>>>>>>> master
                     cadastrar(agenda);
                     break;
 
@@ -98,7 +102,11 @@ public class ex01 {
                 case "Consultar":
                     consultar(agenda);
                     break;
+<<<<<<< HEAD
             }
+=======
+           }
+>>>>>>> master
         } while (!op.equals(menu[4]));
     }
 
@@ -123,7 +131,11 @@ public class ex01 {
         } else {
             JOptionPane.showMessageDialog(null, "Contato inexistente!");
         }
+<<<<<<< HEAD
 
+=======
+ 
+>>>>>>> master
     }
 
     private static void excluir(Agenda agenda) {

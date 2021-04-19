@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -165,3 +166,9 @@ int main()
 
     return 0;
 }
+=======
+//
+// Created by bentocarlos on 4/12/21.
+//
+
+>>>>>>> master
