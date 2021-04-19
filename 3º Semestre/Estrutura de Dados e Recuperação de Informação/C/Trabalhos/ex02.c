@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -86,7 +85,7 @@ void Rem_Dup(NO **Inicio)
             q = r -> dir;
 
             if (p -> info == r -> info) {
-                p -> dir = q;
+                (r -> esq -> dir = q;
                 free(r);
 
                 r = q;
@@ -166,9 +165,3 @@ int main()
 
     return 0;
 }
-=======
-//
-// Created by bentocarlos on 4/12/21.
-//
-
->>>>>>> master
