@@ -73,28 +73,49 @@ void Imprime(NO *Inicio)
     printf("NULL\n\n");
 }
 
-void Rem_Dup(NO **Inicio, NO **Fim)
+int contaLista(NO *Inicio)
 {
-    NO *p, *q, *r;
+    NO *p = Inicio;
+    int contador = 0;
 
-   for (p = *Inicio; p != NULL; p = p-> dir) {
-        for (r = p -> dir; r != NULL; r = r -> dir) {
+    while (p != NULL)
+    {
+        contador++;
+        p = p -> dir;
+    }
 
-            if (p -> info == r -> info) {
-                if (r == *Fim) {
-                    *Fim = (*Fim) -> esq;
-                }
-                q = r;
+    return contador;
+}
 
-                r -> esq -> dir = r -> dir;
-                if (r -> dir != NULL) {
-                    r -> dir -> esq = r -> esq;
-                }
+void restaUm(NO **Inicio, NO **Fim, int valor)
+{
+    NO *p = *Inicio, *q, *r;
 
-                free(q);
+    while (contaLista(&Inicio) != 1) {
+        int contador = 0; 
 
+        while (contador != valor) {
+            if (p == *Fim) {
+                p = *Inicio;
+            } else {
+                p = p -> dir;
             }
+            contador++;
         }
+
+        if (p == *Fim) {
+            *Fim = (*Fim) -> esq;
+        }
+        q = p;
+        
+        p -> esq -> dir = p -> dir;
+        if (p -> dir != NULL) {
+            p -> dir -> esq = p -> esq;
+        }
+        
+        free(q);
+
+        Imprime(&p);
     }
 }
 
@@ -111,7 +132,7 @@ int main()
         puts("1 - Inserir no Inicio");
         puts("2 - Inserir no Fim");
         puts("3 - Imprimir na lista");
-        puts("4 - Remover valores duplicados");
+        puts("4 - Resta 1");
         puts("0 - Sair do programa");
 
         printf("\nDigite a opção -> ");
@@ -146,17 +167,11 @@ int main()
             break;
 
         case 4:
-            if (Inicio == NULL)
-            {
-                printf("\nLista Vazia!");
-            }
-            else
-            {
-                Rem_Dup(&Inicio, &Fim);
-                printf("\nItens repetidos removidos!\n");
-            }
+            printf("Digite um número: ");
+            scanf("%d", &val);
 
-            getchar();
+            restaUm(&Inicio, &Fim, val);
+            Imprime(Inicio);
 
             break;
         }
