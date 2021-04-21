@@ -75,7 +75,8 @@ void Imprime(NO *Inicio)
 
 int contaLista(NO *Inicio)
 {
-    NO *p = Inicio;
+    NO *p = (NO *) calloc(1, sizeof(NO)); 
+    p = Inicio;
     int contador = 0;
 
     while (p != NULL)
@@ -89,10 +90,12 @@ int contaLista(NO *Inicio)
 
 void restaUm(NO **Inicio, NO **Fim, int valor)
 {
-    NO *p = *Inicio, *q, *r;
+    system("clear");
+    getchar();
+    NO *p = *Inicio, *q;
 
-    while (contaLista(&Inicio) != 1) {
-        int contador = 0; 
+    while (contaLista(*Inicio) > 1) {
+        int contador = 1; 
 
         while (contador != valor) {
             if (p == *Fim) {
@@ -103,20 +106,35 @@ void restaUm(NO **Inicio, NO **Fim, int valor)
             contador++;
         }
 
-        if (p == *Fim) {
-            *Fim = (*Fim) -> esq;
+         if (p == *Inicio) {
+            *Inicio = p -> dir;
         }
+
         q = p;
         
-        p -> esq -> dir = p -> dir;
+        if (p -> esq != NULL){
+            p -> esq -> dir = p -> dir;
+        }
+
         if (p -> dir != NULL) {
             p -> dir -> esq = p -> esq;
         }
-        
+
+        if (p == *Fim) {
+            *Fim = (*Fim) -> esq;
+            p = *Inicio;
+        } else {
+            p = p -> dir;
+        }
+       
         free(q);
 
-        Imprime(&p);
+        Imprime(*Inicio);
+        getchar();
     }
+
+    printf("Resta Um -> %d", (*Inicio) -> info);
+    getchar();
 }
 
 int main()
