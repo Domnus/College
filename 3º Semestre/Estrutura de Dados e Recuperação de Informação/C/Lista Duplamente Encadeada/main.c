@@ -2,9 +2,8 @@
 
 struct dados
 {
-    struct dados *esq;
     int info;
-    struct dados *dir;
+    struct dados *prox;
 };
 
 typedef struct dados NO;
@@ -18,7 +17,7 @@ void Ins_Inicio(NO **Inicio, NO **Fim, int v){
     NO *p = (NO *) calloc(1, sizeof(NO));
 
     p -> info = v;
-    p -> dir = *Inicio;
+    p -> prox = *Inicio;
 
     if (*Inicio == NULL){
         *Fim = p;
@@ -31,12 +30,12 @@ void Ins_Fim(NO **Inicio, NO **Fim, int v){
     NO *p = (NO *) calloc(1, sizeof(NO));
 
     p -> info = v;
-    p -> dir = NULL;
+    p -> prox = NULL;
 
     if (*Inicio == NULL){
         *Inicio = p;
     } else {
-        (*Fim) -> dir = p;
+        (*Fim) -> prox = p;
     }
 
     *Fim = p;
@@ -51,9 +50,9 @@ int Rem_Inicio(NO **Inicio, NO **Fim, int *v){
         p = *Inicio;
         *v = p -> info;
 
-        *Inicio = p -> dir;
+        *Inicio = p -> prox;
 
-        if (p -> dir == NULL){
+        if (p -> prox == NULL){
             *Fim = NULL;
         
         free(p);
@@ -78,11 +77,11 @@ int Rem_Fim(NO **Inicio, NO **Fim, int *v){
         } else {
             q = *Inicio;
 
-            while (q -> dir != *Fim){
-                q = q -> dir;
+            while (q -> prox != *Fim){
+                q = q -> prox;
             }
 
-            q -> dir = NULL;
+            q -> prox = NULL;
             *Fim = q;
         }
 
@@ -95,7 +94,7 @@ NO * Consulta(NO *Inicio, int v){
     NO *p = Inicio;
 
     while (p != NULL && p -> info != v){
-        p = p-> dir;
+        p = p-> prox;
     }
 
     return p;
@@ -106,23 +105,9 @@ void imprime(NO *Inicio){
 
     while (p != NULL){
         printf("%d --> ", p->info);
-        p = p -> dir;
+        p = p -> prox;
     }
     printf("NULL\n");
-}
-
-void Ins_Depois(NO *r, int v){
-    NO *p = (NO *) calloc(1, sizeof(NO));
-    NO *q = r -> dir;
-
-    p -> info = v;
-    
-    p -> esq = r;
-    p -> dir = q;
-
-    r -> dir = p;
-    q -> esq = p;
-    
 }
 
 int main(){
@@ -140,7 +125,8 @@ int main(){
         puts("4 - Remover no Inicio");
         puts("5 - Remover no Fim");
         puts("6 - Consultar um valor");
-        puts("7 - Inserir depois");
+        puts("7 - Mover para o Início");
+        puts("8 - Mover para o Fim");
         puts("0 - Sair do programa");
 
         printf("\nDigite a opção: ");
@@ -192,24 +178,21 @@ int main(){
                 break;
             
             case 6:
-                printf("\nDigite o valor a procurar: ");
-                scanf("%d", &val);
+            printf("\nDigite o valor a procurar: ");
+            scanf("%d", &val);
 
-                r = Consulta(Inicio, val);
+            r = Consulta(Inicio, val);
 
-                if (r == NULL){
-                    printf("\nValor não existe na lista!");
-                } else {
-                    printf("\nValor encontrado: %d", r->info);
-                }
+            if (r == NULL){
+                printf("\nValor não existe na lista!");
+            } else {
+                printf("\nValor encontrado: %d", r->info);
+            }
 
-                getchar();
-                getchar();
+            getchar();
+            getchar();
 
-                break;
-
-            case 7: 
-                
+            break;
        }
 
     } while (op != 0);
