@@ -40,21 +40,14 @@ int pop(PILHA *p, int v)
 
 void orderedPush(PILHA *p, PILHA *aux, int v)
 {
-    for (int i = p -> topo; i >= 0; i--) {
-        int x = p -> info[i];
-        if (x <= v) {
-            push(aux, x);
-            pop(p, x);
-        }
-    }
+    for (int i = p -> topo; i >= 0; i--)
+           if (p -> info[i] <= v) 
+            push(aux, pop(p, p -> info[i]));
 
     push(p, v);
 
-    for (int i = aux -> topo; i >= 0; i--) {
-        push(p, aux -> info[i]);
-        pop(aux, aux -> info[i]);
-    }
-
+    for (int i = aux -> topo; i >= 0; i--)
+        push(p, pop(aux, aux -> info[i]));
 }
 
 void print(PILHA p)
