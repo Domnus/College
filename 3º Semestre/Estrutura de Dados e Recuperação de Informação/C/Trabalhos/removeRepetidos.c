@@ -90,9 +90,7 @@ void Rem_Dup(NO **Inicio, NO **Fim)
                 if (r -> dir != NULL) {
                     r -> dir -> esq = r -> esq;
                 }
-
                 free(q);
-
             }
         }
     }
