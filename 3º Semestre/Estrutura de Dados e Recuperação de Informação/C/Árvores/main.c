@@ -1,96 +1,170 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct no_arvore {
-    struct no_arvore *esq;
-    int info;
-    struct no_arvore *dir;
+struct NODE {
+    struct NODE *left;
+    int data;
+    struct NODE *right;
 };
 
-typedef struct no_arvore ARVORE;
+typedef struct NODE TREE;
 
-ARVORE *CAPB (int N) {
-    ARVORE *r;
-
-    if (N == 0)
-        r = NULL;
-    else {
-        r = (ARVORE *) calloc(1, sizeof(ARVORE));
-        printf("\nDigite um valor --> ");
-        scanf("%d", &r->info);
-
-        r->esq = CAPB(N/2);
-        r->dir = CAPB(N - N/2 -1);
-    }
-    return r;
-}
-
-void inOrder(ARVORE *r) {
-    if (r != NULL) {
-        inOrder(r->esq);
-        printf(" %i ", r->info);
-        inOrder(r->dir);
-    }
-}
-
-void preOrder(ARVORE *r) {
-    if (r != NULL) {
-        printf(" %i ", r->info);
-        preOrder(r->esq);
-        preOrder(r->dir);
-    }
-}
-
-void posOrder(ARVORE *r) {
-    if (r != NULL) {
-        posOrder(r->esq);
-        posOrder(r->dir);
-        printf(" %i ", r->info);
-    }
-}
-
-void insere(ARVORE **R, int n) {
+void insert(TREE **R, int n) {
     if (*R == NULL) {
-        (*R) = (ARVORE *) calloc(1, sizeof(ARVORE));
-        (*R) -> info = n;
-        (*R) -> esq = NULL;
-        (*R) -> dir = NULL;
-    } else if (n < (*R) -> info)  {
-        insere(&(*R) -> esq, n);
+        (*R) = (TREE *) malloc(1 * sizeof(TREE));
+        (*R) -> data = n;
+        (*R) -> left = NULL;
+        (*R) -> right = NULL;
+    } else if (n < (*R) -> data) {
+        insert(&(*R) -> left, n);
     } else {
-        insere(&(*R) -> dir, n);
+        insert(&(*R) -> right, n);
     }
 }
 
-ARVORE *busca(ARVORE *R, int v) {
+void preOrder(TREE *R) {
+    if (R != NULL) {
+        printf("%d ", R -> data);
+        preOrder(R -> left);
+        preOrder(R -> right);
+    }
+}
+
+void inOrder(TREE *R) {
+    if (R != NULL) {
+        inOrder(R -> left);
+        printf("%d ", R -> data);
+        inOrder(R -> right);
+    }
+}
+
+void posOrder(TREE *R) {
+    if (R != NULL) {
+        posOrder(R -> left);
+        posOrder(R -> right);
+        printf("%d ", R -> data);
+    }
+}
+
+void *search(TREE *R, int v) {
     if (R == NULL) {
         return NULL;
-    } else if (R -> info == v) {
+    } else if (R -> data == v) {
         return R;
-    } else if (R -> info > v) {
-        return busca(R -> esq, v);
+    } else if (R -> data > v) {
+        return search(R -> left, v);
     } else {
-        return busca(R -> dir, v);
+        return search(R -> right, v);
     }
 }
 
+void descendentes(TREE *R, int v) {
+    if (R != NULL) {
+        if (R -> data == v) {
+            if (R -> left != NULL) {
+                inOrder(R -> left);
+            }
+             if (R -> right != NULL) {
+                inOrder(R -> right);
+            }
+        }
+        descendentes(R -> left, v);
+        descendentes(R -> right, v);
+    }
+}
+
+void descendentesDiretos(TREE *R, int v) {
+    if (R != NULL) {
+        if (R -> data == v) {
+            if (R -> left != NULL) {
+                printf("%d ", R -> left -> data);
+            }
+             if (R -> right != NULL) {
+                printf("%d ", R -> right -> data);
+            }
+        }
+    }
+}
+
+TREE *searchPai(TREE *R, TREE *ret) {
+    if (R -> left == ret || R -> right == ret) 
+        return R;
+    else if (R -> data > ret -> data) 
+        return searchPai(R -> left, ret);
+    else 
+        return searchPai(R -> right, ret);
+}
 
 int main() {
-    ARVORE *Raiz;
+    TREE *Root, *ret, *pai;
+    int op, val;
 
-    int N;
+    Root = NULL; 
 
-    printf("Digite a quantidade de nós da árvores -> ");
-    scanf("%d", &N);
+    do {
+        system("clear");
 
-    Raiz = CAPB(N);
+        puts("1 - Inserir na árvore");
+        puts("2 - Percursos");
+        puts("3 - Buscar um nó");
+        puts("4 - Buscar Pai de um nó");
+        puts("0 - Sair do programa");
 
-    printf("\npreOrder:\n");
-    preOrder(Raiz);
-    printf("\ninOrder:\n");
-    inOrder(Raiz);
-    printf("\nposOrder:\n");
-    posOrder(Raiz);
+        printf("\nDigite a opção: ");
+        scanf("%d", &op);
+        getchar();
+
+        switch (op) {
+            case 1:
+                printf("\nDigite o valor a inserir: ");
+                scanf("%d", &val);
+                insert(&Root, val);
+                break;
+            
+            case 2:
+                printf("\nPre-Order:\n");
+                preOrder(Root);
+
+                printf("\nIn-Order:");
+                inOrder(Root);
+
+                printf("\nPos-Order:\n");
+                posOrder(Root);
+
+                getchar();
+                break;
+            
+            case 3:
+                printf("\nDigite o valor a procurar: ");
+                scanf("%d", &val);
+
+                ret = search(Root, val);
+
+                if (ret == NULL) {
+                    printf("\nValor não existe na árvore!\n");
+                } else {
+                    printf("\nValor existe na árvore: %d\n", ret -> data);
+                }
+
+                getchar();
+                break;
+            
+            case 4:
+                printf("\nDigite o nó a procurar:");
+                scanf("%d", &val);
+
+                ret = search(Root, val);
+
+                if (ret == NULL) {
+                    printf("\nValor não existe na árvore! Logo, não tem pai!\n");
+                } else {
+                    if (ret != Root){
+                        pai = searchPai(Root, ret);
+                        printf("\nO pai do %d é igual a %d\n", pai -> data, ret -> data);
+                    }
+                }
+        }
+    } while (op != 0);
 
     return 0;
 }

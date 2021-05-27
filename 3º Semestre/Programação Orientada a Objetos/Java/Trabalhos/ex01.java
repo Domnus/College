@@ -4,6 +4,8 @@
 // Frederico Hanai            RA: 604593
 // Hugo Seiti Odajima         RA: 606537
 
+package Trabalhos;
+
 import javax.swing.JOptionPane;
 import java.util.ArrayList;
 
