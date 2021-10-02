@@ -1,0 +1,38 @@
+# Andressa Caroline R. Bueno 607290
+# Bento Carlos S. dos Santos 600784
+# Fernando Cremonez Costa    604097
+# Frederico Hanai            604593
+# Hugo Seiti Odajima         606537
+
+# 1. Escreva o comando SQL para criar o um índice na tabela empregado para coluna “Nome”. Chame este índice de “i_empregado_nome”.
+CREATE INDEX i_empregado_nome ON empregado(Nome);
+
+# 2. Escreva o comando SQL para criar o um índice na tabela empregado para coluna “Nome”, mas que seja indexado em ordem reversa, ou seja de Z-A. Chame este índice de “i_empregado_nome_r”.
+CREATE INDEX i_empregado_nome_r ON empregado (Nome DESC);
+
+# 3. Escreva o comando SQL para criar um índice, chamado i_dependente_data_sexo na tabela dependente para as colunas “Data_Nasc e Sexo (nesta ordem).
+CREATE INDEX i_dependente_data_sexo ON dependente(Data_Nasc, Sexo);
+
+# 4. Escreva o comando SQL para criar um índice único chamado i_u_depentende_rg na tabela dependente para a coluna “RG”.
+CREATE UNIQUE INDEX i_u_dependente_rg ON dependente(RG);
+
+# 5. Escreva o comando SQL para criar um VIEW denominada media_salario, sendo que esta view deve conter as colunas “coddepto”, “descricao” e “media”. Sendo que a coluna “media” deve ser a média de salário dos empregados do departamento.
+CREATE VIEW media_salario as
+    SELECT d.coddepto, d.descricao, AVG(e.Salario) as media
+    FROM departamento d, empregado e
+    WHERE d.CodDepto = e.CodDepto
+    GROUP BY d.coddepto;
+
+# 6. Escreva o comando SQL utilizando a VIEW media_salario e exiba o registro referente ao departamento com o coddepto igual a 20.
+SELECT * FROM media_salario
+WHERE coddepto = 20;
+
+# 7. Escreva o comando SQL para criar uma VIEW denominada projeto_horas, a qual deve exibir o nome do projeto e a quantidade de horas gastas pelo mesmo, somente para os projetos cujo coddepto seja maior que 15.
+CREATE VIEW projeto_horas as
+    SELECT p.Nome, SUM(pe.Horas) as qtde_Horas
+    FROM projeto p, projeto_empregado pe
+    WHERE p.CodDepto > 15 AND p.CodProj = pe.CodProj
+    GROUP BY p.Nome;
+
+# 8. É possível realizar operações DML (Insert, Update ou Delete) na VIEW projeto_horas? Justifique sua resposta.
+# Não, pois como é uma view complexa com várias condições não é possivel fazer operações de CRUD.
