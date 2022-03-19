@@ -1,0 +1,12 @@
+@{
+    ViewData["title"] = "Bem-Vindo";
+}
+
+<h2>Bem-Vindos</h2>
+<ul>
+  @for(int i = 0; i < (int)ViewData["vezes"]!; i++)
+    {
+        <img src="https://static-cdn.jtvnw.net/jtv_user_pictures/a95a6f74-bb24-4bc3-9af0-64c3f6219ead-profile_image-150x150.png" width=1000>
+        <li>@ViewData["Mensagem"]</li>
+    }
+</ul>
