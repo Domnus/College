@@ -1,9 +1,10 @@
+#!usr/bin/env python3
+
 import io
 import sys
 from pathlib import Path
-import time
 
-palavrasReservadas = ['if','while','else','int','float','input','print','match','case','import','random']
+#palavrasReservadas = ['if','while','else','int','float','input','print','match','case','import','random']
 caracteresEspeciais = ['.', ',', '(', ')', '[', ']', '{', '}', '=', '\"', "\'", ":",";"]
 condicionais = ['%','!','?','<','>', '+', '-', '*', '/', '=']
 condicionaisDuplas = ['!=','+=', '-=', '*=', '/=','==','>=','<=', '**']
@@ -71,7 +72,8 @@ def lexLine(row, text):
                 insertToken(row, col, lastDance, letter)
                 lastDance= ''
                 
-            if letter in palavrasReservadas or letter in caracteresEspeciais:
+            #if letter in palavrasReservadas or letter in caracteresEspeciais:
+            if letter in caracteresEspeciais:
                 token = insertToken(row, col, token, letter)
             else:
                 token += letter
@@ -86,9 +88,9 @@ def lexLine(row, text):
 
 def insertToken(row, col, token, letter):
     if token != '':
-        if token in palavrasReservadas:
-            taipe = 'Palavra Reservada'
-        elif token in caracteresEspeciais:
+#        if token in palavrasReservadas:
+#            taipe = 'Palavra Reservada'
+        if token in caracteresEspeciais:
             taipe = 'Caracter Especial'
         elif token in condicionais or token in condicionaisDuplas:
             taipe = 'Condicional'
@@ -123,10 +125,9 @@ def isfloat(token):
         return True
 
 
-def main():
-    '''
+def lexer():
     # Enable this for debug
-    filePath = str(Path('texto.txt').absolute())
+    filePath = str(Path('teste.txt').absolute())
 
     loadFile(filePath)
     for token in tokens:
@@ -140,18 +141,11 @@ def main():
 
     else:
 
-        start_time = time.time()
-
         subcommand = sys.argv[1]
         filePath = str(Path(subcommand).absolute())
 
         loadFile(filePath)
 
-        for line in tokens:
-            print(line)
+    '''
 
-        print(f"Time of compilation: {time.time() - start_time}")
-
-
-if __name__ == "__main__":
-    main()
+    return tokens
