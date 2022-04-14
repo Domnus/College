@@ -16308,6 +16308,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/bentocarlos/Projects/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Produtos/Details.cshtml",
+      "TargetPath": "Views\\Produtos\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/bentocarlos/Projects/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/HelloWorld/Index.cshtml",
       "TargetPath": "Views\\HelloWorld\\Index.cshtml",
       "FileKind": "mvc"
@@ -16333,8 +16338,23 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "/home/bentocarlos/Projects/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Produtos/Index.cshtml",
+      "TargetPath": "Views\\Produtos\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "/home/bentocarlos/Projects/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/_ViewImports.cshtml",
       "TargetPath": "Views\\_ViewImports.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/bentocarlos/Projects/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Produtos/Delete.cshtml",
+      "TargetPath": "Views\\Produtos\\Delete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/bentocarlos/Projects/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Produtos/Edit.cshtml",
+      "TargetPath": "Views\\Produtos\\Edit.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -16360,6 +16380,11 @@
     {
       "FilePath": "/home/bentocarlos/Projects/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/HelloWorld/Welcome.cshtml",
       "TargetPath": "Views\\HelloWorld\\Welcome.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "/home/bentocarlos/Projects/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Produtos/Create.cshtml",
+      "TargetPath": "Views\\Produtos\\Create.cshtml",
       "FileKind": "mvc"
     },
     {
