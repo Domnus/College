@@ -12,22 +12,22 @@ condicionaisDuplas = ['!=','+=', '-=', '*=', '/=','==','>=','<=', '**']
 tokens = []
 
 
-def loadFile(filePath):
+def load_file(filePath):
     with io.open(filePath, mode="r", encoding="utf-8") as file:
-        parseFile(file)
+        parse_file(file)
 
     file.close()
 
 
-def parseFile(file):
+def parse_file(file):
     for line in enumerate(file):
         row  = line[0]
         text = line[1]
         
-        lexLine(row, text.rstrip())
+        lex_line(row, text.rstrip())
 
 
-def lexLine(row, text):
+def lex_line(row, text):
     lastToken  = ''
     lastDance= ''
     token  = ''
@@ -41,12 +41,12 @@ def lexLine(row, text):
         else:
             if lastToken + letter in condicionaisDuplas:
                 token = lastToken + letter
-                insertToken(row, col, token, letter)
+                insert_token(row, col, token, letter)
                 token = ''
                 lastToken = ''
                 continue
             else:
-                insertToken(row, col, lastToken, letter)
+                insert_token(row, col, lastToken, letter)
                 lastToken = ''
 
             if letter in condicionais:
@@ -57,7 +57,7 @@ def lexLine(row, text):
                 if token:
                     token += letter
                     continue
-                insertToken(row, col, token, letter)
+                insert_token(row, col, token, letter)
                 token = ''
                 lastDance += letter
                 continue
@@ -67,26 +67,26 @@ def lexLine(row, text):
                         lastDance += letter
                         continue
                     else: 
-                        insertToken(row, col, lastDance, letter)
+                        insert_token(row, col, lastDance, letter)
                         lastDance= ''
-                insertToken(row, col, lastDance, letter)
+                insert_token(row, col, lastDance, letter)
                 lastDance= ''
                 
             #if letter in palavrasReservadas or letter in caracteresEspeciais:
             if letter in caracteresEspeciais:
-                token = insertToken(row, col, token, letter)
+                token = insert_token(row, col, token, letter)
             else:
                 token += letter
                 continue
 
-        insertToken(row, col, token, letter)
+        insert_token(row, col, token, letter)
         token = ''
-    token = insertToken(row, col, token, letter)
-    insertToken(row, col, lastToken, letter)
-    insertToken(row, col, lastDance, letter)
+    token = insert_token(row, col, token, letter)
+    insert_token(row, col, lastToken, letter)
+    insert_token(row, col, lastDance, letter)
 
 
-def insertToken(row, col, token, letter):
+def insert_token(row, col, token, letter):
     if token != '':
 #        if token in palavrasReservadas:
 #            taipe = 'Palavra Reservada'
@@ -94,10 +94,10 @@ def insertToken(row, col, token, letter):
             taipe = 'Caracter Especial'
         elif token in condicionais or token in condicionaisDuplas:
             taipe = 'Condicional'
-        elif isint(token):
+        elif is_int(token):
             token = int(token)
             taipe = 'Integer'
-        elif isfloat(token):
+        elif is_float(token):
             token = float(token)
             taipe = 'Float'
         else:
@@ -107,7 +107,7 @@ def insertToken(row, col, token, letter):
     return letter
 
 
-def isint(token):
+def is_int(token):
     try:
         token = int(token)
     except (TypeError, ValueError):
@@ -116,7 +116,7 @@ def isint(token):
         return True
 
 
-def isfloat(token):
+def is_float(token):
     try:
         token = float(token)
     except (TypeError, ValueError):
@@ -126,12 +126,12 @@ def isfloat(token):
 
 
 def lexer():
+    '''
     # Enable this for debug
     filePath = str(Path('teste.txt').absolute())
+    load_file(filePath)
 
-    loadFile(filePath)
-    for token in tokens:
-        print(token)
+
     '''
 
     #Enable this for regular use
@@ -144,8 +144,7 @@ def lexer():
         subcommand = sys.argv[1]
         filePath = str(Path(subcommand).absolute())
 
-        loadFile(filePath)
+        load_file(filePath)
 
-    '''
 
     return tokens

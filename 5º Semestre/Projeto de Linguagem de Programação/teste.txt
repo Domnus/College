@@ -1,1 +1,1 @@
-id + num * id $
+( id + id) + id $
