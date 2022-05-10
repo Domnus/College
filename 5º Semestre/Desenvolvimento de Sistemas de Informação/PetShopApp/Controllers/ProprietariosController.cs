@@ -1,4 +1,3 @@
-#nullable disable
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +19,17 @@ namespace PetShopApp.Controllers
         }
 
         // GET: Proprietarios
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString)
         {
-            return View(await _context.Proprietario.ToListAsync());
+            var props = from p in _context.Proprietario
+                select p;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                props = props.Where(s => s.Nome!.Contains(searchString));
+            }
+
+            return View(await props.ToListAsync());
         }
 
         // GET: Proprietarios/Details/5
@@ -34,6 +41,7 @@ namespace PetShopApp.Controllers
             }
 
             var proprietario = await _context.Proprietario
+                .Include(r => r.Animais)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (proprietario == null)
             {
@@ -54,7 +62,7 @@ namespace PetShopApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nome,CPF,Endereco,Telefone,Email,DtNascimento")] Proprietario proprietario)
+        public async Task<IActionResult> Create([Bind("Id,Nome,Cpf,Endereco,Telefone,Email,DtNascimento")] Proprietario proprietario)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +94,7 @@ namespace PetShopApp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,CPF,Endereco,Telefone,Email,DtNascimento")] Proprietario proprietario)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nome,Cpf,Endereco,Telefone,Email,DtNascimento")] Proprietario proprietario)
         {
             if (id != proprietario.Id)
             {

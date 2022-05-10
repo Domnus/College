@@ -8,85 +8,105 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = PetShopApp
 build_property.RootNamespace = PetShopApp
-build_property.ProjectDir = /home/bentocarlos/Projects/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/
+build_property.ProjectDir = C:\Users\bento\OneDrive\Documents\Github\College\5º Semestre\Desenvolvimento de Sistemas de Informação\PetShopApp\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = /home/bentocarlos/Projects/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp
+build_property.MSBuildProjectDirectory = C:\Users\bento\OneDrive\Documents\Github\College\5º Semestre\Desenvolvimento de Sistemas de Informação\PetShopApp
 build_property._RazorSourceGeneratorDebug = 
 
-[/home/bentocarlos/Projects/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/HelloWorld/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSGVsbG9Xb3JsZC9JbmRleC5jc2h0bWw=
+[C:/Users/bento/OneDrive/Documents/Github/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Animais/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQW5pbWFpc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/bentocarlos/Projects/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/HelloWorld/Welcome.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSGVsbG9Xb3JsZC9XZWxjb21lLmNzaHRtbA==
+[C:/Users/bento/OneDrive/Documents/Github/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Animais/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQW5pbWFpc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/bentocarlos/Projects/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Home/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
+[C:/Users/bento/OneDrive/Documents/Github/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Animais/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQW5pbWFpc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/bentocarlos/Projects/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Home/Privacy.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
+[C:/Users/bento/OneDrive/Documents/Github/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Animais/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQW5pbWFpc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/bentocarlos/Projects/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Produtos/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHV0b3MvQ3JlYXRlLmNzaHRtbA==
+[C:/Users/bento/OneDrive/Documents/Github/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Animais/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQW5pbWFpc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/bentocarlos/Projects/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Produtos/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHV0b3MvRGVsZXRlLmNzaHRtbA==
+[C:/Users/bento/OneDrive/Documents/Github/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/HelloWorld/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGVsbG9Xb3JsZFxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/bentocarlos/Projects/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Produtos/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHV0b3MvRGV0YWlscy5jc2h0bWw=
+[C:/Users/bento/OneDrive/Documents/Github/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/HelloWorld/Welcome.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGVsbG9Xb3JsZFxXZWxjb21lLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/bentocarlos/Projects/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Produtos/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHV0b3MvRWRpdC5jc2h0bWw=
+[C:/Users/bento/OneDrive/Documents/Github/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/bentocarlos/Projects/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Produtos/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvZHV0b3MvSW5kZXguY3NodG1s
+[C:/Users/bento/OneDrive/Documents/Github/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/bentocarlos/Projects/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Proprietarios/Create.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvcHJpZXRhcmlvcy9DcmVhdGUuY3NodG1s
+[C:/Users/bento/OneDrive/Documents/Github/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Produtos/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b3NcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/bentocarlos/Projects/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Proprietarios/Delete.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvcHJpZXRhcmlvcy9EZWxldGUuY3NodG1s
+[C:/Users/bento/OneDrive/Documents/Github/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Produtos/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b3NcRGVsZXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/bentocarlos/Projects/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Proprietarios/Details.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvcHJpZXRhcmlvcy9EZXRhaWxzLmNzaHRtbA==
+[C:/Users/bento/OneDrive/Documents/Github/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Produtos/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b3NcRGV0YWlscy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/bentocarlos/Projects/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Proprietarios/Edit.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvcHJpZXRhcmlvcy9FZGl0LmNzaHRtbA==
+[C:/Users/bento/OneDrive/Documents/Github/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Produtos/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b3NcRWRpdC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/bentocarlos/Projects/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Proprietarios/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUHJvcHJpZXRhcmlvcy9JbmRleC5jc2h0bWw=
+[C:/Users/bento/OneDrive/Documents/Github/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Produtos/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvZHV0b3NcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/bentocarlos/Projects/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Shared/Error.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
+[C:/Users/bento/OneDrive/Documents/Github/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Proprietarios/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcHJpZXRhcmlvc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/bentocarlos/Projects/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Shared/_ValidationScriptsPartial.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+[C:/Users/bento/OneDrive/Documents/Github/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Proprietarios/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcHJpZXRhcmlvc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/bentocarlos/Projects/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/_ViewImports.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+[C:/Users/bento/OneDrive/Documents/Github/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Proprietarios/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcHJpZXRhcmlvc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/bentocarlos/Projects/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/_ViewStart.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvX1ZpZXdTdGFydC5jc2h0bWw=
+[C:/Users/bento/OneDrive/Documents/Github/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Proprietarios/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcHJpZXRhcmlvc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/home/bentocarlos/Projects/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Shared/_Layout.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19MYXlvdXQuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = b-1w07w71gdh
+[C:/Users/bento/OneDrive/Documents/Github/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Proprietarios/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUHJvcHJpZXRhcmlvc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/bento/OneDrive/Documents/Github/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/bento/OneDrive/Documents/Github/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/bento/OneDrive/Documents/Github/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/bento/OneDrive/Documents/Github/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/bento/OneDrive/Documents/Github/College/5º Semestre/Desenvolvimento de Sistemas de Informação/PetShopApp/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-jtenm5w1zx

@@ -16,4 +16,6 @@ using PetShopApp.Models;
         public DbSet<PetShopApp.Models.Proprietario> Proprietario { get; set; }
 
         public DbSet<PetShopApp.Models.Produto> Produto { get; set; }
+
+        public DbSet<PetShopApp.Models.Animal> Animal { get; set; }
     }

@@ -8,23 +8,23 @@ namespace PetShopApp.Models
 	{
         public int Id {get; set;}
 
-        public string Nome {get; set;}
+        public string? Nome {get; set;}
 
         [Display(Name = "Descrição")]
-        public string Descricao {get; set;}
+        public string? Descricao {get; set;}
 
         [Display(Name = "Quantidade Estoque")]
-        public int QuantidadeEstoque {get; set;}
+        public int? QuantidadeEstoque {get; set;}
 
         [Display(Name = "Preço de Compra")]
         [DataType(DataType.Currency)]
         [Column(TypeName = "decimal(18,2)")]
-        public float PrecoCompra {get; set;}
+        public float? PrecoCompra {get; set;}
 
         [Display(Name = "Preço de Venda")]
         [DataType(DataType.Currency)]
         [Column(TypeName = "decimal(18,2)")]
-        public float PrecoVenda {get; set;}
+        public float? PrecoVenda {get; set;}
 
 	}
 }

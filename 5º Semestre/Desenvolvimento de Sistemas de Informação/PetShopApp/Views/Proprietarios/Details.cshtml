@@ -48,6 +48,53 @@
         </dd>
     </dl>
 </div>
+
+<table class="table">
+@foreach (var animal in Model.Animais) {
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => animal.Nome)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => animal.DtNascimento)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => animal.IdadeAnimal)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => animal.Raca)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => animal.Nome)
+            </td>
+            <td>
+                @Html.DisplayFor(model => animal.DtNascimento)
+            </td>
+            <td>
+                @Html.DisplayFor(model => animal.IdadeAnimal) anos
+            </td>
+            <td>
+                @Html.DisplayFor(model => animal.Raca)
+            </td>
+            <td>
+                <a asp-controller="Animais" asp-action="Edit" asp-route-id="@animal.Id">Edit</a> |
+                <a asp-controller="Animais" asp-action="Details" asp-route-id="@animal.Id">Details</a> |
+                <a asp-controller="Animais" asp-action="Delete" asp-route-id="@animal.Id">Delete</a>
+            </td>
+        </tr>
+    </tbody>
+}
+</table>
+
+<div>
+    <p><a asp-controller="Animais" asp-action="Create">Novo animal</a></p>
+</div>
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
     <a asp-action="Index">Back to List</a>
