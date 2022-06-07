@@ -126,12 +126,10 @@ def is_float(token):
 
 
 def lexer():
-    '''
     # Enable this for debug
+    '''
     filePath = str(Path('teste.txt').absolute())
     load_file(filePath)
-
-
     '''
 
     #Enable this for regular use
@@ -145,6 +143,5 @@ def lexer():
         filePath = str(Path(subcommand).absolute())
 
         load_file(filePath)
-
 
     return tokens
