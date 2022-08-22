@@ -1,0 +1,23 @@
+Sistemas Operacionais
+
+Atividade 1
+
+1.) Explique as principais funções de um sistema operacional?
+R: Um sistema operacionail tem a função de disponibilizar os recursos de um sistema de forma simples e transparente. Ele gerencia a utilização de recursos, tem uma interface para que os usuários utilizem os recursos do sistema e garante a integridade dos dados de um sistema.
+
+2.) Dentre os tipos de sistemas operacionais, explique o baseado no time sharing...
+R: O tipo de sistema de tempo compartilhado permite a interação entre o usuário e sistema através de teclado, video, mouse, etc? Esse sistema responde a execução dos comandos em um curto espaço de tempo (segundos ou até mais rápido)
+
+3.) Qual a diferença entre sistemas monotarefa e multitarefas?
+R: Um sistema monotarefa executa uma única tarefa de cada vez, enquanto que um sistema multitarefa pode executar várias tarefas (jobs) ao mesmo tempo.
+
+4.) Um sistema monousuário pode ser multitarefa? Explique.
+R: Sim. Um sistema monousuário é aquele onde apenas um usuário pode acessar o sistema de cada vez, como um notebook pessoal, por exemplo. Mas isso não impede que ele seja multitarefa.
+
+5.) Cite pelo menos duas vantagens de um sistema fortemente acoplado.
+R: Pode executar vários programas ao mesmo tempo.
+Pode dividir um programa entre vários processadores, executando vários processos simultaneamente.
+
+6.) Cite pelo menos duas vantagens de um sistema fracamente acoplado.
+R: Permite que os recursos dos computadores sejam compartilhados na rede.
+Os sistemas são independentes entre si.

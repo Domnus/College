@@ -1,4 +1,4 @@
- table = []
+table = []
 alfabeto = []
 estados = []
 estadosFinais = []

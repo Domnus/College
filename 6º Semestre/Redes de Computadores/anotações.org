@@ -1,0 +1,91 @@
+#+title: Anotações
+
+* Redes podem ser classificadas em 2 dimensções:
+** Tecnologia de Transmissão:
+***   Difusão
+- A informação é distribuída para todo mundo, apenas o destinatário rebece ela
+  * Métodos de difusão
+    * Broadcast
+      - Manda para todo mundo
+    * Multicast
+      - Manda para alguns
+***   Ponto a ponto
+- A informação passa de roteador a roteador até chegar ao destino
+** Escala
+***   Escopo de uma rede (LAN/WAN)
+- PAN (Personal Area Network)
+- (W)LAN ((Wireless) Local Area Network)
+- MAN (Metropolitan Area Network)
+- WAN (Wide Area Network)
+
+
+*   Topologia de rede:
+** Física
+    - Como os dispositivos estão conectados fisicamente
+** Lógica
+    - Como os dados são colocados e retirados da rede
+
+
+*   Ethernet
+- Quando há uma colisão o protocolo Ethernet dá um tempo de espera aleatório para as máquinas de origem
+
+** Rede de difusão (manda pra todo mundo)
+    A informação é enviada para todos, mas apenas o dono a coleta.
+** Datagrama:
+   | Origem | Destino | Dados |
+   |        |         |       |
+** Sniffer
+    - Acessa todos os pacotes trafegados pela rede
+
+
+*   Equipamentos de rede:
+** Atenuação
+    - Sinal perde força de acordo com a distãncia
+     * Para cabos coaxiais o máximo é 185 metros
+** Repetidores
+    - Regenera e reenvia o sinal
+** Bridges
+    - Dispositivo ativo que coleta informações e toma decisões
+****   CAM
+    | Porta | Endereço MAC |
+    | A     | B            |
+****   Domínio de colisão
+    - Local onde o dispositivo disputa o meio
+
+
+*   DHCP
+    - Fornece endereços IP automaticamente para os dispositivos da rede
+
+
+*   DIX
+    - Responsáveis pela criação do padrão Ethernet
+
+
+*   Topologia Estrela
+  - Todos os dispositivos estão conectados através de um dispositivo
+  - Atenuação a partir de 100 metros
+
+** HUB
+    - Funciona como um repetidor multiportas, envia os pacotes para todos
+** Switch
+    - Funciona como um Bridge multiportas, envia o datagrama apenas para o destinatário
+    * Gerenciável
+      - É configurado para ter uma função específica.
+        * Spanning Tree
+          - Gerencia duas conexões entre switches para reduncância
+
+***   Estrela estendida
+ - Switches conectados em outros switches
+
+
+*   Topologia Anel
+**   Token Ring
+- Rede proprietária: tem um dono (IBM)
+- Token: | Origem | Destino | Dado |
+  * O token circula pela rede, e caso algum dispositivo tenha algo a transmitir, o token leva o dado até o destino
+  * Não há colisão
+  * Apenas um trasmite por vez
+- Rede determinística
+  * Cada dispositivo tem um tempo determinado para transmitir
+
+- MAU (Media Access Unit)

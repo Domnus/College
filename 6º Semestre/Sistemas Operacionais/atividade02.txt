@@ -1,0 +1,12 @@
+1 - Não. Um processo depois de pronto não tem como ficar bloqueado. Do mesmo jeito um processo bloqueado não pode mudar seu estado para Executando pois ele precisa estar pronto primeiro.
+
+2 - Escalonamento de Filas Múltiplas: Os processos não permanecem em uma mesma fila até o término do processamento, pois o SO faz um ajuste dinâmico (mecanismo adaptativo) para ajustar os processos em função do comportamento do sistema. Os processos não são previamente associados às filas, mas direcionados pelo sistema entre as diversas filas com base no seu comportamento.
+
+3 - Interrupção de software: quando o processo solicita um serviço do SO. Quando o programa vai ler ou gravar algum dado no HD ou SSD. 
+Interrupção de E/S: Indica alteração do estado final do SO gerado pelos dispositivo de entrada e saída. Quando o programa pede para o usuário escrever alguma coisa no teclado.
+Traps: Interrupção causada por erros na execução do programa. Quando o programa tenta fazer uma divisão por zero.
+
+4 - Preemptiva: permite que o processo seja interrompido forçadamente para liberar a CPU para outro processo.
+Cooperativa: o processo é executado do início ao fim e só é interrompido quando ele mesmo pede para ser interrompido.
+
+
