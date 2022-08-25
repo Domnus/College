@@ -18,15 +18,27 @@ def prioridade():
 
 def printao(pilha, time_slice):
 	cls()
+	cabecalho = ["Process ID", "Tempo Entrada", "Tempo de Execução", "Prioridade"]
+
 	print("|-------------------------------------------------------------|")
-	print("| Process ID | Tempo Entrada | Tempo de Execução | Prioridade |")
+	print(f"| {cabecalho[0]} | {cabecalho[1]} | {cabecalho[2]} | {cabecalho[3]} |")
+
 	for item in pilha:
 		print("|------------+---------------+-------------------+------------|")
-		print(f"|{item.id:^12}", end="")
+
+		cabecalhoProcess = str(len(cabecalho[0]) + 2)
+		print(f"|{item.id:^{cabecalhoProcess}}", end="")
+
 		tempo_entrada = item.tempo_entrada.strftime("%H:%M:%S")
-		print(f"|{tempo_entrada:^15}", end="")
-		print(f"|{item.tempo_execucao:^19}", end="")
-		print(f"| {item.prioridade:^11}|")
+		cabecalhoTempoEntrada = str(len(cabecalho[1]) + 2)
+		print(f"|{tempo_entrada:^{cabecalhoTempoEntrada}}", end="")
+
+		cabecalhoTempoExecucao = str(len(cabecalho[2]) + 2)
+		print(f"|{item.tempo_execucao:^{cabecalhoTempoExecucao}}", end="")
+
+		cabecalhoPrioridade = str(len(cabecalho[3]) + 1)
+		print(f"| {item.prioridade:^{cabecalhoPrioridade}}|")
+
 	print("|-------------------------------------------------------------|")
 	print(f"Time Slice: {time_slice}		CPU: [{pilha[0].id}]")
 	
