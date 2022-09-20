@@ -1,0 +1,15 @@
+# Andressa Caroline R. Bueno RA: 607290
+# Bento Carlos S. dos Santos RA: 600784
+# Frederico Hanai 			 RA: 604593
+# Hugo Seiti Odajima 		 RA: 606537
+
+1 - A partir do momento que o usuario solicita a execução de um novo programa, é utilizado a memoria secundaria(disco), possibita que novos programas possam ser executados mesmo em situações por falta de espaço na memoria principal. Quando um programa novo vai ser executado e nao existe memoria principal disponivel, o SO escolhe um programa na disponivel na memoria principal e move para o disco, o sistema se torna lento por conta do tempo gasto com as trocas, o acesso ao disco é muito demorado.
+
+2 - Também conhecida como arquivos de paginação, a memória virtual consiste em um espaço que é reservado no
+momento em que o sistema operacional é instalado em um computado. A memoria virtual é uma tecnica pela qual é possivel
+utilizar uma parte do disco rigido como se fosse a memoria principal. Uma outra função da memoria virtual é o mapeamento
+que basicamente consiste em fazer a tradução de endereços virtuais para endereços reais.
+
+3 - Paginação é uma técnica onde um programa é dividido em blocos com mesmo tamanho, chamados de páginas. Cada página virtual é mapeada na página da memória real que pode estar tanto na memória real quanto na memória secundária. 
+	Na segmentação, os programas são divididos em subrotinas e estruturas de dados, que são colocados em blocos de memória que tem tamanho diferente dependendo da aplicação, esses blocos são chamados de segmentos.
+	A segmentação é um método mais completo pois permite que o espaço total possa ser maior que o espaço da memória física. Ele também permite que os dados possam ser protegidos separadamente e o compartilhamento de processos entre usuários é mais fácil.

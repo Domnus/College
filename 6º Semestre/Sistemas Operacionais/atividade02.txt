@@ -1,3 +1,8 @@
+# Andressa Caroline R. Bueno RA: 607290
+# Bento Carlos S. dos Santos RA: 600784
+# Frederico Hanai 			 RA: 604593
+# Hugo Seiti Odajima 		 RA: 606537
+
 1 - Não. Um processo depois de pronto não tem como ficar bloqueado. Do mesmo jeito um processo bloqueado não pode mudar seu estado para Executando pois ele precisa estar pronto primeiro.
 
 2 - Escalonamento de Filas Múltiplas: Os processos não permanecem em uma mesma fila até o término do processamento, pois o SO faz um ajuste dinâmico (mecanismo adaptativo) para ajustar os processos em função do comportamento do sistema. Os processos não são previamente associados às filas, mas direcionados pelo sistema entre as diversas filas com base no seu comportamento.
