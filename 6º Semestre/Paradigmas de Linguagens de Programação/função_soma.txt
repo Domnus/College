@@ -1,0 +1,42 @@
+$list = array(1, 2, 3, 4, 5);
+
+function sum($x, $y) {
+	return $x + $y;
+}
+
+$soma = array_reduce($list, "sum");
+$soma10 = array_reduce($list, "sum", 10);
+echo $soma . PHP_EOL;
+echo $soma10;
+
+################################################
+
+from functools import reduce
+
+lista = [1,2,3,4,5]
+
+def sum(a, b):
+    return (a + b)
+
+soma = reduce(sum, lista)
+soma10 = reduce(sum, lista, 10)
+print(soma)
+print(soma10)
+
+################################################
+
+list = [1,2,3,4,5]
+
+def sum(lista, initial=0)
+  sum = initial
+  lista.each do |number|
+    sum += number
+  end
+  return sum
+end
+
+soma = sum(list)
+soma_10 = sum(list, 10)
+
+puts(soma)
+puts(soma_10)

@@ -1,0 +1,23 @@
+1 - Paradigma é o modelo utilizado para fazer a solução de um problema. É o modo como você programa.
+
+2 - É mais fácil porque várias linguagens compartilham o mesmo paradigma. Várias linguagems tem a mesma sintaxe. Já para aprender um novo paradigma, você precisa aprender a pensar de um jeito totalmente diferente.
+
+3 - Funcional, procedural e orientado a objetos.
+
+4 - Imutabilidade está relacionada ao paradigma declarativo. Quando você chama uma função "soma", por exemplo, você recebe o valor da soma inteira. Diferente do imperativo, onde você cria uma variável soma para guardar os valores da soma que vão mudando a cada iteração do loop.
+
+5 - Declarativo
+
+6 - Python é multiparadigma. Você consegue fazer um código de soma de vários jeitos em Python. Seja chamando a função sum(), quando fazendo você mesmo um loop para somar valores de uma lista, por exemplo. Também é possível criar objetos em python.
+
+7 - Sequencial. Goto é uma palavra reservada que serve para você pular para um outro lugar do código. Ele causa uma mudança de fluxo no código.
+
+8 - O paradigma orientado a objetos é focado no objeto. O paradigma procedural tem foco nas funções.
+
+9 - 
+
+10 - Passagem por valor é quando você copia o valor de uma variável para outra, onde cada uma aponta para um local de memória diferente. Passagem por referência é quando você passa o local da memória de uma variável para outra, logo as duas vão apontar para o mesmo local. Nesse caso, se você alterar o valor de uma, a outra também é alterada.
+
+11 - Alta coesão é criar funções que fazem apenas uma coisa. Cada função tem uma responsabilidade só. Baixo acoplamento é não fazer metódos parecidos, mas que fazem basicamente a mesma coisa. Reutilizar o código.
+
+12 - Fazer um observador para notificar os interessados. Padrão de projeto Observer.
