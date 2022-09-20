@@ -93,35 +93,35 @@ class Grafo:
 		vertices = self.get_vertices()
 		visitados = []
 		fila = []
-		#verticeAleatorio = randint(0, len(vertices)-1)
-		verticeAleatorio = 0
+		verticeAleatorio = randint(0, len(vertices)-1)
+		#verticeAleatorio = 0
 
-		for vertice in vertices:
-			if vertice not in visitados:
-				fila.append(vertice)
-				visitados.append(vertice)
+		fila.append(vertices[verticeAleatorio])
+		visitados.append(vertices[verticeAleatorio])
 
-				while len(fila) > 0:
-					vertA = fila.pop(0)
+		while len(fila) > 0:
+			vertA = fila.pop(0)
+			cls()
+			print(f"Vértice atual: {vertA}")
+			print(f"Fila: {fila}")
+			print(f"Visitados: {visitados}")
+			input("Pressione ENTER para continuar...")
 
-					for vertB in vertices:
-						caminhos = self.find_path(vertA, vertB)
-						caminhos.sort(key = len)
-						caminho = caminhos[0]
-						if vertB != vertA:
+			for vertB in grafo[vertA]:
+				if vertB not in visitados:
+					visitados.append(vertB)
+					fila.append(vertB)
 
-							if len(caminho) == 2:
-								if vertB not in visitados:
-									cls()
-									print(f"Vértice atual: {vertA}")
-									print(f"Fila: {fila}")
-									print(f"Visitados: {visitados}")
+					cls()
+					print(f"Vértice atual: {vertA}")
+					print(f"Fila: {fila}")
+					print(f"Visitados: {visitados}")
+					input("Pressione ENTER para continuar...")
 
-									#input("Pressione ENTER para continuar...")
-									print()
-									visitados.append(vertB)
-									fila.append(vertB)
-
+		if len(visitados) == len(vertices):
+			print("Todos os vértices foram visitados")
+			input("Pressione ENTER para continuar...")
+			cls()
 
 	def validacaoComplexo(grafo):
 		arestas = grafo.get_arestas()
@@ -177,13 +177,13 @@ def main():
 
 	dictGrafo = {
 		'A': ['D', 'E', 'B'],
+        'B': ['A', 'C', 'E'],
+		'C': ['B', 'F'],
 		'D': ['A', 'E', 'G'],
 		'E': ['A', 'B', 'D'],
-        'B': ['A', 'C', 'E'],
-		'G': ['D', 'H'],
-		'C': ['B', 'F'],
-		'H': ['F', 'I', 'G'],	
 		'F': ['C', 'H', 'I'],
+		'G': ['D', 'H'],
+		'H': ['F', 'I', 'G'],	
 		'I': ['F','H']	
 	}
 
