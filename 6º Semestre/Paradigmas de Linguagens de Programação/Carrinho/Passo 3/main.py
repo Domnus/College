@@ -1,5 +1,14 @@
+from functools import reduce
 import time
 start_time = time.time()
+
+def pipe(f, g):
+    return g(f)
+
+
+def soma(x, y):
+    return x + y
+
 
 class Item():
     def __init__(self, id, produto, preco):
@@ -25,7 +34,7 @@ class Carrinho():
         self.total -= item.preco
 
     def getTotal(self):
-        return sum(map(lambda item: item.getPreco(), self.itens))
+        return  pipe(list(map(lambda item: item.getPreco(), self.itens)), sum)
 
 
 def main():
@@ -34,7 +43,6 @@ def main():
     carrinho.adicionar(Item(2, 'Kindle', 179))
     carrinho.adicionar(Item(3, 'Macbook Pro', 1199))
     print(f"O total do carrinho é: R${carrinho.getTotal()}")
-
 
 main()
 end_time = time.time()

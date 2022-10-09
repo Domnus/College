@@ -1,0 +1,23 @@
+1- Uma interrupção é um sinal de um dispositivo, que tipicamente resulta em uma troca de contextos, isto é, o processador para de fazer o que está fazendo para atender o dispositivo que pediu a interrupção.
+DMA é a abreviação de "Direct Memory Access", é o metodo que permite que um dispositivo de entrada e saida envie ou receba
+dados diretamente da memoria principal, ignorando a CPU, acelerando as operações que envolvem memoria.
+
+No DMA as operações são realizadas mais rápido, pois envia diretamente a memória principal. Já a interrupção, permite aos processadores modernos, responder a eventos gerados por dispositivos, enquanto outro trabalho está sendo realizado.
+
+
+2- Raid:
+É um conjunto redundante de discos independentes. Uma tecnologia que cria um subsistema de armazenamento de dados q é composto pro varios discos individuais, Tanto Hd/SSD.
+è um sistema confiavel, se caso um parar, falhar o outro garantira q o sistema continue funcionando normalmente, combina varios discos rigidos para formar uma unidade logica de armazenamento de dados.
+
+
+Nivel 0 -> O disco acaba sendo utilizado em pararelo com um já existente, divide o conteudo entre dois Hds, utilizado em aplicação que lida com grandes volumes de dados.
+Nivel 1 -> Outro disco é usado paralelamento ao primeiro, e acaba sendo utilizado como copia. Se caso houver uma escrita, ambos dados são modificados nos dois discos ao mesmo tempo, não há muita velocidade pois é focado na proteção dos dados.
+Nivel 2 -> Sistema detecta falhas em discos rigidos, funciona como checagem de erros.
+Nivel 3 -> Transferencia de grandes volumes de dados e confiabilidade na proteção das informações, controle de erros e agilidade.
+Nivel 5 -> Os dados são espalhados em todas as unidades, e não são gravados em uma unidade fixa, é requerido ao menos 3 unidades, mas pode trabalhar com até 16, resiste a uma unica falha de unidade sem perder dados ou acessar dados.
+Nivel 6 -> Os dados de paridades são gravados em duas unidades, requer 4 unidades e pode suportar 2 drivers simultaneamente, se caso uma unidade morrer e for substituida, demora horas ou dias para reconstruir.
+Nivel 10 -> É uma configuração de raid aninhada ou hibrida, fornece segurança ao espelhar todos os dados em unidades secundarias, o striping acelera a transferencias de dados.
+
+3 - O kernel do Linux já vem com alguns drivers pré instalados nele, então se você tem uma impressora velha e perdeu o cd dela, provavelmente uma distribuição linux reconhecerá ela por ter drivers que reconhecem ela.    - No windows a maioria dos drivers têm que ser instalados separadamente para ter um reconhecimento completo do dispositivo. Assim, muitos dispositivos vêm com CDs de instalação dos drivers para que o dispositivo seja reconhecido pelo sistema operacional. 
+
+

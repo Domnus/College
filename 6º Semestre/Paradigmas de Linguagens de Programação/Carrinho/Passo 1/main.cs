@@ -1,7 +1,3 @@
-//Andressa Caroline Reis Bueno 	RA: 607290
-//Bento Carlos Silva dos Santos RA: 600784
-//Frederico Hanai 				RA: 604593
-
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,12 +38,21 @@ public class Carrinho
 				
 public class Program
 {
-	public static void Main(){
+	public static void Passo1(){
 		Carrinho carrinho = new Carrinho();
 		carrinho.AdicionarItem(new Item(1, "Produto 1", 499));
 		carrinho.AdicionarItem(new Item(2, "Produto 2", 179));
 		carrinho.AdicionarItem(new Item(3, "Produto 3", 1199));
 
 		Console.WriteLine("O total do carrinho é: R$" + carrinho.Total());
+	}
+
+	public static void Main()
+	{
+		var watch = new System.Diagnostics.Stopwatch();
+		watch.Start();
+		Passo1();
+		watch.Stop();
+		Console.WriteLine("Tempo de execução: " + watch.ElapsedMilliseconds + "ms");
 	}
 }
