@@ -9,4 +9,5 @@ class Produto():
 		return self.altura * self.largura * self.comprimento
 
 	def getCubicoComFator(self):
-		return self.getCubicoIndividual() // 6
+		return self.getCubicoIndividual() / 6
+
