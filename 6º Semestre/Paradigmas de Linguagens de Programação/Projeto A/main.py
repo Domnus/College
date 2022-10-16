@@ -21,7 +21,7 @@ for produto in produtos:
 
 
 def empilhamento_soma(): # B1513
-	 return(sum(map(lambda produto: produto[0], produtos)))
+	return(sum(map(lambda produto: produto[0], produtos)))
 
 
 def empilhamento_maior(campo): # C1513 | D1513
@@ -80,11 +80,14 @@ def raiz_cubica_maximas(dimensao): # B1518 | C1518 | D1518
 
 
 def check_count_35(valor):
-	return 0 if valor == 35 else 1
+	if valor >= 35:
+		return 1
+	elif valor < 35:
+		return 0
 	
 
 def count_35(dimensao):
-	return sum(map(lambda produto: check_count_35(getattr(produto, dimensao)), produtosOrdenados))
+	return sum(map(lambda produto: check_count_35(getattr(produto, dimensao)), produtosOrdenados)) # type: ignore
 
 
 def check_somatoria_35(dimensao):
@@ -92,7 +95,7 @@ def check_somatoria_35(dimensao):
 
 
 def somatoria_35(dimensao):
-	return sum(check_somatoria_35(dimensao))
+	return sum(check_somatoria_35(dimensao)) # type: ignore
 
 			
 def aux_tratamento_min_maior(dimensao):
@@ -106,6 +109,7 @@ def tratamento_min_maior(dimensao): # B1528
 	match (dimensao):
 		case "altura":
 			if count_35(dimensao) > 0: # type: ignore
+				print(count_35(dimensao))
 				return count_35(dimensao)
 			else:
 				return aux_tratamento_min_maior("comprimento")	
@@ -159,20 +163,12 @@ def printAllFunctions():
 	print("Empilhamento Maior Altura: ", empilhamento_maior("altura"))
 	print("Empilhamento Maior Largura: ", empilhamento_maior("largura"))
 	print("Empilhamento Maior Comprimento: ", empilhamento_maior("comprimento"))
-	print("Correcao Minimas Altura: ", correcao_min("altura"))
-	print("Correcao Minimas Largura: ", correcao_min("largura"))
-	print("Correcao Minimas Comprimento: ", correcao_min("comprimento"))
 	print("Soma Cubico Individual: ", soma_cubico("individual"))
 	print("Soma Cubico Com Fator: ", soma_cubico("comFator"))
 	print("Dimensao Alternativa Raiz Cubica: ", dimensao_alternativa_raiz_cubica())
-	print("Raiz Cubica Maximas Altura: ", raiz_cubica_maximas("altura"))
-	print("Raiz Cubica Maximas Largura: ", raiz_cubica_maximas("largura"))
-	print("Raiz Cubica Maximas Comprimento: ", raiz_cubica_maximas("comprimento"))
-	print("Count 35 Altura: ", count_35("altura"))
-	print("Count 35 Largura: ", count_35("largura"))
-	print("Count 35 Comprimento: ", count_35("comprimento"))
-	print("Somatoria 35 Altura: ", somatoria_35("altura"))
-	print("Somatoria 35 Largura: ", somatoria_35("largura"))
+	print("Correcao Minimas Altura: ", correcao_min("altura"))
+	print("Correcao Minimas Largura: ", correcao_min("largura"))
+	print("Correcao Minimas Comprimento: ", correcao_min("comprimento"))
 
 
 printAllFunctions()

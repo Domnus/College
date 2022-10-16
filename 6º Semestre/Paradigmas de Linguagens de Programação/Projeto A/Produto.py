@@ -10,4 +10,3 @@ class Produto():
 
 	def getCubicoComFator(self):
 		return self.getCubicoIndividual() / 6
-
