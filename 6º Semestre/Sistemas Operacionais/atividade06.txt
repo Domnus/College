@@ -1,0 +1,9 @@
+Em Linux existem várias formas de como gravar arquivos. Exemplo: ext4, fat32, btrfs, etc. A pasta raíz do sistema é a pasta "/". Dentro dela existem várias subpastas, as quais são armazenados diferentes tipos de arquivos. Algumas dessas pastas são:
+	/bin: Contém os binários dos programas
+	/dev: Contém os arquivos referentes a cada dispositivo conectado no computador. Cada dispositivo é representado por um arquivo
+	/etc: Contém os arquivos de configuração local do computador
+	/home: Contém os diretórios pessoais de cada usuário (menos o usuário root)
+	/root: Contém os diretórios do usuário root
+	/mnt: Local temporário para montar partições
+	
+
