@@ -118,6 +118,53 @@ class Grafo:
                             return True
         return False
 
+    def tabelaKruskal(self):
+        grafo = self.dictGrafo
+        tabela_direcionada = []
+        tabela_nao_direcionada = []
+
+        for vertice in grafo:
+            for verticeAdjacente in grafo[vertice]:
+                repetido = False
+                for aresta in tabela_direcionada:
+                    if verticeAdjacente == aresta[0][1] and vertice == aresta[0][0] or verticeAdjacente == aresta[0][0] and vertice == aresta[0][1]:
+                        repetido = True
+                        break
+                if not repetido:
+                    tabela_direcionada.append([[vertice, verticeAdjacente], grafo[vertice][verticeAdjacente]])
+                tabela_nao_direcionada.append([[vertice, verticeAdjacente], grafo[vertice][verticeAdjacente]])
+
+        tabela_direcionada.sort(key=lambda aresta_lambda: aresta_lambda[1])
+        tabela_nao_direcionada.sort(key=lambda aresta_lambda: aresta_lambda[1])
+        return tabela_direcionada, tabela_nao_direcionada
+
+    def kruskal(self):
+        tabela_direcionada, tabela_nao_direcionada = self.tabelaKruskal()
+        agm = {}
+
+        for aresta in tabela_nao_direcionada:
+            if aresta[0][0] not in agm:
+                agm[aresta[0][0]] = {}
+            if aresta[0][1] not in agm:
+                agm[aresta[0][1]] = {}
+
+            agm[aresta[0][0]][aresta[0][1]] = aresta[1]
+            agm[aresta[0][1]][aresta[0][0]] = aresta[1]
+
+            agm_grafo = Grafo(agm, self.direcionado)
+
+            if agm_grafo.achar_ciclo():
+                agm[aresta[0][0]].pop(aresta[0][1])
+                continue
+
+            vertice_grafo_original = self.get_vertices()
+            vertice_agm = agm_grafo.get_vertices()
+
+            if len(vertice_grafo_original) == len(vertice_agm):
+                if agm_grafo.validacaoConexo():
+                    self.dictGrafo = agm_grafo.dictGrafo
+                    return agm_grafo
+
     def getGrauVertice(self):
         vertices = self.get_vertices()
         graus = {}
@@ -153,5 +200,4 @@ class Grafo:
                         fila.append(verticeAdjacente)
 
             if len(ordem_topologica) == len(self.get_vertices()):
-                print("Ordem topológica: ", ordem_topologica)
                 return True
