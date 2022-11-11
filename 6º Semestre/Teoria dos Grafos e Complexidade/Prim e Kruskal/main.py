@@ -10,39 +10,48 @@ from Grafo import Grafo
 
 
 def montarGrafoPonderado():
-    vertices = []
-    arestas = []
-    dict_grafo = {}
+    # vertices = []
+    # arestas = []
+    # dict_grafo = {}
 
-    # Input do grafo
-    while not vertices:
-        vertices = input("Vértices do grafo: ").upper().split()
-        while True:
-            res = input("Digite o par de vértices para as arestas [Digite 0 para parar]: ").upper().split()
+    # # Input do grafo
+    # while not vertices:
+    #     vertices = input("Vértices do grafo: ").upper().split()
+    #     while True:
+    #         res = input("Digite o par de vértices para as arestas [Digite 0 para parar]: ").upper().split()
 
-            if res[0] == '0':
-                break
+    #         if res[0] == '0':
+    #             break
 
-            grau = input("Digite o grau desse vértice: ")
+    #         grau = input("Digite o grau desse vértice: ")
 
-            if not grau.isdigit():
-                print("Grau inválido")
-                continue
-            for aresta in res:
-                if aresta not in vertices:
-                    arestas.append([res, grau])
+    #         if not grau.isdigit():
+    #             print("Grau inválido")
+    #             continue
+    #         for aresta in res:
+    #             if aresta not in vertices:
+    #                 arestas.append([res, grau])
 
-    # Montagem do grafo
-    for vertice in vertices:
-        dict_grafo[vertice] = {}
-        arestas_b = {}
-        for aresta in arestas:
-            if vertice in aresta[0]:
-                vertices_adjacentes = list(arestas_b.keys())
-                vert = [x for x in aresta[0] if x != vertice and x not in vertices_adjacentes]
-                if len(vert) > 0:
-                    arestas_b[vert[0]] = aresta[1]
-                    dict_grafo[vertice] = arestas_b
+    # # Montagem do grafo
+    # for vertice in vertices:
+    #     dict_grafo[vertice] = {}
+    #     arestas_b = {}
+    #     for aresta in arestas:
+    #         if vertice in aresta[0]:
+    #             vertices_adjacentes = list(arestas_b.keys())
+    #             vert = [x for x in aresta[0] if x != vertice and x not in vertices_adjacentes]
+    #             if len(vert) > 0:
+    #                 arestas_b[vert[0]] = aresta[1]
+    #                 dict_grafo[vertice] = arestas_b
+
+    dict_grafo = {
+       '0': {'1': 6, '2': 1, '3': 5},
+       '1': {'0': 6, '2': 2, '4': 5},
+       '2': {'0': 1, '1': 2, '3': 2, '4': 6, '5': 4},
+       '3': {'0': 5, '2': 2, '5': 4},
+       '4': {'1': 5, '2': 6, '5': 3},
+       '5': {'2': 4, '3': 4, '4': 3}
+    }
     return Grafo(dict_grafo)
 
 
@@ -106,13 +115,6 @@ def montarGrafoNaoDirecionado():
                     arestas_b.append(vert[0])
         dict_grafo[vertice] = arestas_b
 
-    dict_grafo = {
-        'V1': ['V2', 'V3'],
-        'V2': ['V1', 'V3'],
-        'V3': ['V1', 'V2', 'V4'],
-        'V4': ['V3']
-    }
-
     return Grafo(dict_grafo, True)
 
 
@@ -149,11 +151,7 @@ def main():
                     print("Essa opção não existe!!")
                     print("-----------------------")
                     continue
-                grafo_agm = grafo.kruskal()
-
-                if grafo_agm is not None:
-                    for vertice in grafo_agm.dictGrafo:
-                        print(f"{vertice}: {grafo_agm.dictGrafo[vertice]}")
+                grafo_agm = grafo.prim()
                 break
         else:
             cls()

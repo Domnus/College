@@ -165,6 +165,7 @@ class Grafo:
                     self.dictGrafo = agm_grafo.dictGrafo
                     return agm_grafo
 
+
     def getGrauVertice(self):
         vertices = self.get_vertices()
         graus = {}
@@ -175,6 +176,7 @@ class Grafo:
                     contador += 1
             graus[vertA] = contador
         return graus
+
 
     def validarKahn(self):
         if not self.direcionado:
@@ -201,3 +203,30 @@ class Grafo:
 
             if len(ordem_topologica) == len(self.get_vertices()):
                 return True
+
+            
+    def verticeSeguro(self):
+        pass
+
+    def prim(self):
+        grafo = self.dictGrafo
+        grafoOrdenado = sorted(grafo.items(), key=lambda x: x[0])
+        agm = {}
+        vertices = self.get_vertices()
+
+        # vertice_aleatorio = randint(0, len(vertices) - 1)
+        
+        for vertice in vertices:
+            pass
+            #enea fechou a sala pow
+
+
+
+# dict_grafo = {
+#     '0': {'1': 6, '2': 1, '3': 5},
+#     '1': {'0': 6, '2': 2, '4': 5},
+#     '2': {'0': 1, '1': 2, '3': 2, '4': 6, '5': 4},
+#     '3': {'0': 5, '2': 2, '5': 4},
+#     '4': {'1': 5, '2': 6, '5': 3},
+#     '5': {'2': 4, '3': 4, '4': 3}
+# }
