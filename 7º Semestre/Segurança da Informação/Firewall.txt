@@ -1,0 +1,10 @@
+- Quais as funções de um firewall
+
+- Fazer 2 orçamentos para a implantação de um firewall para uma empresa
+    - Orçamento de baixo custo
+    - Orçamento de uma solução completa
+    
+- No orçamento devem ser especificadas:
+    - Valor;
+    - Vantagens;
+    - Serviços disponibilizados pela solução;
