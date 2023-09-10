@@ -1,0 +1,76 @@
+=============================================================
+PROTO
+=============================================================
+syntax = "proto3";
+
+package calculadora;
+
+message Operands {
+  int32 a = 1;
+  int32 b = 2;
+}
+
+message Result {
+  int32 value = 1;
+}
+
+service Calculadora {
+  rpc Soma (Operands) returns (Result);
+  rpc Divisao (Operands) returns (Result);
+}
+
+=============================================================
+SERVIDOR
+=============================================================
+import grpc
+from concurrent import futures
+import calculadora_pb2
+import calculadora_pb2_grpc
+
+class CalculadoraServicer(calculadora_pb2_grpc.CalculadoraServicer):
+    def Soma(self, request, context):
+        result = request.a + request.b
+        return calculadora_pb2.Result(value=result)
+
+    def Divisao(self, request, context):
+        if request.b == 0:
+            context.set_code(grpc.StatusCode.INVALID_ARGUMENT)
+            context.set_details('Divisão por zero!')
+            return calculadora_pb2.Result(value=0)
+
+        result = request.a / request.b
+        return calculadora_pb2.Result(value=result)
+
+def serve():
+    server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
+    calculadora_pb2_grpc.add_CalculadoraServicer_to_server(CalculadoraServicer(), server)
+    server.add_insecure_port('[::]:50051')
+    server.start()
+    server.wait_for_termination()
+
+if __name__ == '__main__':
+    serve()
+
+
+=============================================================
+CLIENTE
+=============================================================
+import grpc
+import calculadora_pb2
+import calculadora_pb2_grpc
+
+def run():
+    with grpc.insecure_channel('localhost:50051') as channel:
+        stub = calculadora_pb2_grpc.CalculadoraStub(channel)
+        
+        request = calculadora_pb2.Operands(a=10, b=5)
+        response = stub.Soma(request)
+        print("Soma result:", response.value)
+        
+        request = calculadora_pb2.Operands(a=10, b=2)
+        response = stub.Divisao(request)
+        print("Divisao result:", response.value)
+
+if __name__ == '__main__':
+    run()
+

@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package helloworld;
+
+message HelloRequest {
+  string name = 1;
+  int32 num1 = 2;
+  int32 num2 = 3;
+}
+
+message HelloReply {
+  string message = 1;
+}
+
+service Greeter {
+  rpc SayHello (HelloRequest) returns (HelloReply);
+  rpc Soma (HelloRequest) returns (HelloReply);
+  rpc Divisao (HelloRequest) returns (HelloReply);
+}
