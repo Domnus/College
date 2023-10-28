@@ -1,45 +1,67 @@
+// assign.js
+const express = require('express');
+const bodyParser = require('body-parser');
 const mqtt = require('mqtt');
-const axios = require('axios');
+const amqp = require('amqplib');
 
-// Configurações MQTT
-const mqttBroker = 'mqtt://localhost'; // Substitua pelo seu broker MQTT
+const app = express();
+const port = 3000;
+
+const mqttBroker = 'mqtt://localhost';
 const mqttTopic = 'topico/dados';
 
-// Configurações da API com fila
-const apiUrl = 'https://sua-api.com/receber-dados'; // Substitua pela URL da sua API
+const rabbitMQUrl = 'amqp://localhost';
+const queueName = 'localizacao';
 
-// Cria um cliente MQTT
+let rabbitMQConfigured = false;
+
+async function setupRabbitMQ() {
+    try {
+        if (!rabbitMQConfigured) {
+            const connection = await amqp.connect(rabbitMQUrl);
+            const channel = await connection.createChannel();
+            await channel.assertQueue(queueName, { durable: true });
+            console.log(`Fila RabbitMQ '${queueName}' criada e pronta para receber mensagens.`);
+            rabbitMQConfigured = true;
+        }
+    } catch (error) {
+        console.error('Erro ao configurar RabbitMQ:', error.message);
+    }
+}
+
+app.on('receber-dados', async (data) => {
+    const id = data.id;
+    const coordenadas = data.coordenadas;
+
+    await setupRabbitMQ();
+
+    try {
+        const connection = await amqp.connect(rabbitMQUrl);
+        const channel = await connection.createChannel();
+
+        console.log(`Enviando dados para a fila RabbitMQ '${queueName}'...`);
+
+        await channel.sendToQueue(queueName, Buffer.from(JSON.stringify({ id, coordenadas })), { persistent: true });
+    } catch (error) {
+        console.error('Erro ao enviar dados para a fila RabbitMQ:', error.message);
+    }
+});
+
 const client = mqtt.connect(mqttBroker);
 
-// Evento chamado quando o cliente MQTT se conecta ao broker
 client.on('connect', () => {
-  console.log('Conectado ao broker MQTT');
+    console.log('Conectado ao broker MQTT - Assign');
 
-  // Subscreve ao tópico MQTT
-  client.subscribe(mqttTopic);
+    client.subscribe(mqttTopic);
+
+    client.on('message', (topic, message) => {
+        try {
+            const data = JSON.parse(message.toString());
+            app.emit('receber-dados', data);
+        } catch (error) {
+            console.error('Erro ao processar mensagem MQTT:', error.message);
+        }
+    });
 });
 
-// Evento chamado quando uma mensagem é recebida no tópico especificado
-client.on('message', async (topic, message) => {
-  try {
-    // Decodificar a mensagem JSON recebida
-    const data = JSON.parse(message.toString());
-
-    // Enviar os dados para a API com fila usando Axios
-    const response = await axios.post(apiUrl, data);
-
-    // Verificar o status da resposta
-    if (response.status === 200) {
-      console.log('Dados enviados com sucesso para a API');
-    } else {
-      console.error('Erro ao enviar dados para a API. Código de status:', response.status);
-    }
-  } catch (error) {
-    console.error('Erro ao processar mensagem MQTT:', error.message);
-  }
-});
-
-// Lidar com erros de conexão MQTT
-client.on('error', (error) => {
-  console.error('Erro de conexão MQTT:', error);
-});
+module.exports = { start: () => app.listen(port, () => console.log(`Servidor API iniciado em http://localhost:${port}`)) };
