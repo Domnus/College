@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package rastreio;
+
+service MetricsService {
+  rpc RegistrarLocalizacao (Localizacao) returns (Empty);
+}
+
+message Localizacao {
+  string id_dispositivo = 1;
+  double latitude = 2;
+  double longitude = 3;
+  string marca = 4;
+}
+
+message Empty {}

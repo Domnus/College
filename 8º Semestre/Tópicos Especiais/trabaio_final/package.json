@@ -1,10 +1,14 @@
 {
   "dependencies": {
+    "@grpc/grpc-js": "^1.9.8",
+    "@grpc/proto-loader": "^0.7.10",
     "amqplib": "^0.10.3",
+    "apollo-server": "^3.12.1",
     "axios": "^1.5.1",
     "body-parser": "^1.20.2",
     "bull": "^4.11.4",
     "express": "^4.18.2",
+    "geolib": "^3.3.4",
     "moment": "^2.29.4",
     "mqtt": "^5.1.2",
     "redis": "^4.6.10",

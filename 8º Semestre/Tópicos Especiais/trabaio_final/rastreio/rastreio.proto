@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+// Definição do serviço de Métricas
+service MetricsService {
+  // Método para registrar uma nova localização
+  rpc RegistrarLocalizacao (Localizacao) returns (Status);
+
+  // Adicione outras operações conforme necessário
+}
+
+// Definição da mensagem para enviar dados de localização
+message Localizacao {
+  string id_dispositivo = 1;
+  double latitude = 2;
+  double longitude = 3;
+  string marca = 4;
+}
+
+// Definição da mensagem de status (pode ser expandida conforme necessário)
+message Status {
+  bool sucesso = 1;
+  string mensagem = 2;
+}
