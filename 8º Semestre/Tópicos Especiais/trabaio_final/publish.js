@@ -40,7 +40,7 @@ client.on('connect', () => {
         client.publish(mqttTopic, payload, { qos: 1 });
 
         console.log(`Informações publicadas: ${payload}`);
-    }, 10000);
+    }, 1000);
 });
 
 // Lidar com erros de conexão MQTT

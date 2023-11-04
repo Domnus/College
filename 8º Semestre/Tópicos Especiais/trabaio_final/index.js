@@ -2,7 +2,7 @@
 
 // Require dos módulos necessários
 const rastreio = require('./rastreio/rastreio-api');
-const metriscas = require('./metricas/metricas-api');
+const metricas = require('./metricas/metricas-api');
 const publish = require('./publish');
 const assign = require('./assign');
 

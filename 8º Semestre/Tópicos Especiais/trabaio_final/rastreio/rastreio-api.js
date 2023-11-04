@@ -4,14 +4,15 @@ const uuid = require('uuid');
 const moment = require('moment');
 const http = require('http');
 const socketIo = require('socket.io');
-const sqlite3 = require('sqlite3').verbose();
 const amqp = require('amqplib');
 const grpc = require('@grpc/grpc-js');
 const protoLoader = require('@grpc/proto-loader');
 const { v4: uuidv4 } = require('uuid');
 const db = require('../db');  // Importa o arquivo db.js
+const cors = require('cors');
+const geolib = require('geolib');
 
-const protoPath = '/home/bentocarlos/Documents/College/8º Semestre/Tópicos Especiais/trabaio_final/rastreio/rastreio.proto';  
+const protoPath = '/home/bentocarlos/Documents/College/8º Semestre/Tópicos Especiais/trabaio_final/rastreio/rastreio.proto';
 
 const metricsProto = grpc.loadPackageDefinition(
   protoLoader.loadSync(protoPath)
@@ -25,6 +26,7 @@ const server = http.createServer(app);
 const io = socketIo(server);
 
 app.use(bodyParser.json());
+app.use(cors())
 
 // Middleware para limpar a cache diariamente
 app.use((req, res, next) => {
@@ -172,21 +174,23 @@ app.get('/historico/:id_dispositivo', async (req, res) => {
 async function consumirFilaRabbitMQ() {
   try {
     const queueUrl = 'amqp://localhost';
-    const queue = 'localizacao_queue';
+    const queue = 'localizacao';
 
     const connection = await amqp.connect(queueUrl);
     const channel = await connection.createChannel();
     await channel.assertQueue(queue, { durable: true });
 
-    console.log('Consumidor aguardando mensagens...');
-
     // Função para processar uma mensagem
     const processarMensagem = async (mensagem) => {
       try {
-        // Adicione aqui a lógica para processar a mensagem
-        console.log('Mensagem recebida:', mensagem.content.toString());
+        const dados = JSON.parse(mensagem.content.toString());
+        const { latitude, longitude } = dados.coordenadas;
+        const id_localizacao = dados.id;
+
+        return { id_localizacao, latitude, longitude }
       } catch (error) {
         console.error('Erro ao processar mensagem:', error.message);
+        return null;
       }
     };
 
@@ -195,37 +199,58 @@ async function consumirFilaRabbitMQ() {
       const mensagem = await channel.get(queue);
 
       if (mensagem) {
-        await processarMensagem(mensagem);
+        const localizacao = await processarMensagem(mensagem);
+        // Acknowledge (informar que a mensagem foi processada com sucesso)
+        channel.ack(mensagem);
+
+        // Retorna as informações da localização salva
+        return localizacao;
       }
+
+      return null; // Retorna null se não houver mensagem na fila
     };
 
-    // Consumir a fila a cada 3 segundos
-    setInterval(consumir, 3000);
+    // Consumir a fila continuamente
+    return consumir();
   } catch (error) {
     console.error('Erro ao iniciar o consumidor:', error.message);
   }
 }
 
-// Iniciar o consumo da fila RabbitMQ
-consumirFilaRabbitMQ();
-
 // Rota para receber dados de localização
-app.post('/receber-localizacao', async (req, res) => {
+app.post('/salvar-localizacao/:id_dispositivo', async (req, res) => {
   try {
-    const { id_dispositivo, latitude, longitude } = req.body;
+    const { id_dispositivo } = req.params;
 
     // Verificar se o dispositivo existe e está ativo
     const dispositivo = await getDispositivoById(id_dispositivo);
 
-    if (!dispositivo || !dispositivo.ativo) {
+    if (dispositivo.length <= 0) {
       return res.status(404).json({ error: 'Dispositivo não encontrado ou inativo' });
     }
 
-    // Salvar no banco de dados
-    const novaLocalizacao = await saveLocalizacao(id_dispositivo, latitude, longitude);
+    const localizacao = await consumirFilaRabbitMQ();
 
+    const { id_localizacao, latitude, longitude } = localizacao;
+
+    const ultimaLocalizacao = await getUltimaLocalizacao(id_dispositivo);
+
+    var distancia = 0;
+
+    if (ultimaLocalizacao) {
+      // Calcula a distância usando a fórmula de Haversine
+      var distancia = geolib.getDistance(
+        { latitude: ultimaLocalizacao.latitude, longitude: ultimaLocalizacao.longitude },
+        { latitude, longitude } 
+      ) / 1000;
+    }
+
+    // Salvar no banco de dados
+    const localizacaoSalva = await saveLocalizacao(id_localizacao, id_dispositivo, latitude, longitude, distancia);
+
+    console.log(`Localização salva no banco de dados para dispositivo: ${id_dispositivo}`);
     // Enviar para a API de Métricas
-    enviarLocalizacaoParaMetrics(id_dispositivo, latitude, longitude, 'apple');
+    // enviarLocalizacaoParaMetrics(id_dispositivo, latitude, longitude, 'apple');
 
     res.status(200).json({ message: 'Localização recebida com sucesso' });
   } catch (error) {
@@ -248,21 +273,6 @@ app.get('/ultima-localizacao/:id_dispositivo', async (req, res) => {
     res.json(ultimaLocalizacao);
   } catch (error) {
     console.error('Erro ao obter última localização:', error.message);
-    res.status(500).json({ error: 'Erro interno do servidor' });
-  }
-});
-
-// Rota para receber dados de localização da fila
-app.post('/receber-localizacao-fila', async (req, res) => {
-  try {
-    const { id_dispositivo, latitude, longitude } = req.body;
-
-    // Enviar dados para a fila RabbitMQ
-    await enviarParaFilaRabbitMQ({ id_dispositivo, latitude, longitude });
-
-    res.status(200).json({ message: 'Localização enviada para a fila com sucesso' });
-  } catch (error) {
-    console.error('Erro ao receber localização pela fila:', error.message);
     res.status(500).json({ error: 'Erro interno do servidor' });
   }
 });
@@ -306,24 +316,6 @@ const atualizarUltimaLocalizacao = (id_dispositivo, localizacao) => {
   io.to(id_dispositivo).emit('ultimaLocalizacao', localizacao);
 };
 
-// Rota para receber dados de localização
-app.post('/receber-localizacao', async (req, res) => {
-  try {
-    const { id_dispositivo, latitude, longitude } = req.body;
-
-    // Salvar no banco de dados
-    const novaLocalizacao = await saveLocalizacao(id_dispositivo, latitude, longitude);
-
-    // Emitir a última localização para os clientes inscritos
-    emitirUltimaLocalizacao(id_dispositivo);
-
-    res.status(200).json({ message: 'Localização recebida com sucesso' });
-  } catch (error) {
-    console.error('Erro ao receber localização:', error.message);
-    res.status(500).json({ error: 'Erro interno do servidor' });
-  }
-});
-
 // Iniciar o servidor
 server.listen(port, () => {
   console.log(`Servidor de Rastreamento iniciado em http://localhost:${port}`);
@@ -345,19 +337,18 @@ async function getHistoricoLocalizacao(id_dispositivo) {
 }
 
 // Salvar nova localização no banco de dados
-async function saveLocalizacao(id_dispositivo, latitude, longitude) {
+async function saveLocalizacao(id_localizacao, id_dispositivo, latitude, longitude, distancia) {
   return new Promise((resolve, reject) => {
-    const id_localizacao = uuid.v4();
-    const data_hora = moment().format('YYYY-MM-DD HH:mm:ss');
+    const data = moment().format('YYYY-MM-DD HH:mm:ss');
 
     db.run(
-      'INSERT INTO Localizacao (id, id_dispositivo, latitude, longitude, data_hora) VALUES (?, ?, ?, ?, ?)',
-      [id_localizacao, id_dispositivo, latitude, longitude, data_hora],
+      'INSERT INTO Localizacao (id, id_dispositivo, latitude, longitude, data, distancia) VALUES (?, ?, ?, ?, ?, ?)',
+      [id_localizacao, id_dispositivo, latitude, longitude, data, distancia],
       (err) => {
         if (err) {
           reject(err);
         } else {
-          resolve({ id: id_localizacao, id_dispositivo, latitude, longitude, data_hora });
+          resolve({ id: id_localizacao, id_dispositivo, latitude, longitude, data, distancia });
         }
       }
     );
@@ -368,7 +359,7 @@ async function saveLocalizacao(id_dispositivo, latitude, longitude) {
 async function getUltimaLocalizacao(id_dispositivo) {
   return new Promise((resolve, reject) => {
     db.get(
-      'SELECT * FROM Localizacao WHERE id_dispositivo = ? ORDER BY data_hora DESC LIMIT 1',
+      'SELECT * FROM Localizacao WHERE id_dispositivo = ? ORDER BY data DESC LIMIT 1',
       [id_dispositivo],
       (err, row) => {
         if (err) {
@@ -452,6 +443,18 @@ async function getAllDispositivos() {
 async function getDispositivo(codigo) {
   return new Promise((resolve, reject) => {
     db.all('SELECT * FROM Dispositivo WHERE codigo = ?', [codigo], (err, rows) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve(rows);
+      }
+    });
+  });
+}
+
+async function getDispositivoById(id) {
+  return new Promise((resolve, reject) => {
+    db.all('SELECT * FROM Dispositivo WHERE id = ? AND ativo = True', [id], (err, rows) => {
       if (err) {
         reject(err);
       } else {
