@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapa Consulta</title>
+  <!-- Adicione a folha de estilo do Leaflet -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+  <style>
+    #map {
+      height: 400px;
+    }
+  </style>
+</head>
+
+<body>
+  <div>
+    <label for="dispositivoId">ID do Dispositivo:</label>
+    <input type="text" id="dispositivoId" />
+    <button id="consultarBtn">Consultar Localização</button>
+  </div>
+  <div id="map"></div>
+
+  <!-- Adicione os scripts do Leaflet e Google Maps -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      let map;
+      let mapa;
+      let marker = null;
+
+      try {
+        // Tenta criar o mapa usando o Leaflet
+        map = L.map('map').setView([0, 0], 2);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        mapa = 'leaflet';
+      } catch (error) {
+        console.error('Erro ao carregar o mapa Leaflet. Usando fallback...');
+
+        // Se falhar ao carregar o Leaflet, use o Google Maps
+        const googleMapsScript = document.createElement('script');
+        googleMapsScript.src = `https://maps.googleapis.com/maps/api/js?key=&libraries=places&callback=initGoogleMap`;
+        googleMapsScript.defer = true;
+        document.head.appendChild(googleMapsScript);
+
+        window.initGoogleMap = () => {
+          map = new google.maps.Map(document.getElementById('map'), {
+            center: { lat: 0, lng: 0 },
+            zoom: 2,
+          });
+        };
+
+        mapa = 'google';
+      }
+
+      // Mova a função para fora do bloco de inicialização
+      async function consultarLocalizacao() {
+        const dispositivoId = document.getElementById('dispositivoId').value.trim();
+
+        if (dispositivoId) {
+          try {
+            let response;
+
+            response = await fetch(`http://localhost:3001/ultima-localizacao/${dispositivoId}`, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+            });
+
+            const data = await response.json();
+            console.log('Resposta da consulta:', data);
+
+            if (response.status !== 200) {
+              alert('Erro ao consultar a localização do dispositivo.');
+              console.error(data.message);
+            } else {
+              // Se o mapa for do tipo Leaflet
+              if (mapa == 'leaflet') {
+                if (marker) {
+                  map.removeLayer(marker);
+                }
+
+                const { latitude, longitude } = data;
+                marker = L.marker([latitude, longitude]).addTo(map);
+                map.setView([latitude, longitude], 5);
+              } else if (map instanceof google.maps.Map) {
+                // Se o mapa for do tipo Google Maps
+                const { latitude, longitude } = data;
+
+                new google.maps.Marker({
+                  position: { lat: latitude, lng: longitude },
+                  map: map,
+                });
+                map.setCenter({ lat: latitude, lng: longitude });
+                map.setZoom(5);
+              }
+            }
+          } catch (error) {
+            console.error('Erro na consulta de localização:', error);
+            alert('Erro ao consultar a localização do dispositivo.');
+          }
+        } else {
+          alert('Por favor, insira o ID do dispositivo.');
+        }
+      }
+
+      // Adicione o evento de clique ao botão
+      document.getElementById('consultarBtn').addEventListener('click', consultarLocalizacao);
+    });
+  </script>
+</body>
+
+</html>
