@@ -84,6 +84,7 @@ server.bindAsync(`${ADDRESS}:${PORT}`, grpc.ServerCredentials.createInsecure(),
 // Implementar o servidor Apollo GraphQL
 const typeDefs = gql`
   type Dispositivo {
+    id: String
     id_dispositivo: String
     quantidade_posicao: Int
     total_km: Float

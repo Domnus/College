@@ -7,10 +7,10 @@ service MetricsService {
 }
 
 message Localizacao {
-  string id_dispositivo = 1;
-  double latitude = 2;
-  double longitude = 3;
-  string marca = 4;
+  string id = 1;
+  string id_dispositivo = 2;
+  double latitude = 3;
+  double longitude = 4;
 }
 
 message Empty {}

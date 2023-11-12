@@ -30,13 +30,16 @@ app.use(cors())
 
 // Middleware para limpar a cache diariamente
 app.use((req, res, next) => {
+  // Inicialize a cache se não estiver definida
+  req.app.locals.cache = req.app.locals.cache || {};
+
   if (!req.app.locals.cacheCleared) {
     const now = moment();
     const midnight = moment().endOf('day');
     const timeUntilMidnight = midnight.diff(now);
 
     setTimeout(() => {
-      req.app.locals.cache = {};
+      req.app.locals.cache.allDispositivos = null; // Limpe a cache
       req.app.locals.cacheCleared = true;
     }, timeUntilMidnight);
 
@@ -49,28 +52,44 @@ app.use((req, res, next) => {
 // Rota para obter todos os dispositivos
 app.get('/dispositivos', async (req, res) => {
   try {
-    const dispositivos = await getAllDispositivos();
+    const dispositivos = await getAllDispositivos(req, res);
+
+    // Responda com os dispositivos da cache
     res.json(dispositivos);
   } catch (error) {
-    console.error('Erro ao obter dispositivos:', error.message);
+    console.error('Erro ao obter todos os dispositivos:', error.message);
     res.status(500).json({ error: 'Erro interno do servidor' });
   }
 });
 
-// Nova rota para obter um dispositivo específico
+// Rota para obter um dispositivo específico
 app.get('/dispositivos/:id_dispositivo', async (req, res) => {
   try {
     const { id_dispositivo } = req.params;
 
-    const dispositivo = await getDispositivo(id_dispositivo);
+    // Verifique se a cache está definida e se o dispositivo específico está presente na cache
+    if (req.app.locals.cache.allDispositivos && req.app.locals.cache.allDispositivos[id_dispositivo]) {
+      // Se estiver presente na cache, responda com o dispositivo da cache
+      res.json(req.app.locals.cache.allDispositivos[id_dispositivo]);
+    } else {
+      // Se não estiver na cache, busque no banco de dados e armazene na cache
+      const dispositivo = await getDispositivo(id_dispositivo);
 
-    if (dispositivo.length == 0) {
-      return res.status(404).json({ error: 'Dispositivo não encontrado' });
+      if (dispositivo.length === 0) {
+        return res.status(404).json({ error: 'Dispositivo não encontrado' });
+      }
+
+      // Armazene o dispositivo na cache
+      req.app.locals.cache.allDispositivos = {
+        ...req.app.locals.cache.allDispositivos,
+        [id_dispositivo]: dispositivo,
+      };
+
+      // Responda com o dispositivo buscado no banco de dados
+      res.json(dispositivo);
     }
-
-    res.json(dispositivo);
   } catch (error) {
-    console.error('Erro ao obter última localização:', error.message);
+    console.error('Erro ao obter um dispositivo específico:', error.message);
     res.status(500).json({ error: 'Erro interno do servidor' });
   }
 });
@@ -125,7 +144,6 @@ app.delete('/dispositivos/:id_dispositivo', async (req, res) => {
     res.status(500).json({ error: 'Erro interno do servidor' });
   }
 });
-
 
 // Função para enviar localização para a API de Métricas
 function enviarLocalizacaoParaMetrics(id_dispositivo, latitude, longitude, marca) {
@@ -186,8 +204,9 @@ async function consumirFilaRabbitMQ() {
         const dados = JSON.parse(mensagem.content.toString());
         const { latitude, longitude } = dados.coordenadas;
         const id_localizacao = dados.id;
+        const id_dispositivo = dados.idDispositivo;
 
-        return { id_localizacao, latitude, longitude }
+        return { id_dispositivo, id_localizacao, latitude, longitude }
       } catch (error) {
         console.error('Erro ao processar mensagem:', error.message);
         return null;
@@ -218,9 +237,11 @@ async function consumirFilaRabbitMQ() {
 }
 
 // Rota para receber dados de localização
-app.post('/salvar-localizacao/:id_dispositivo', async (req, res) => {
+app.post('/salvar-localizacao', async (req, res) => {
   try {
-    const { id_dispositivo } = req.params;
+    const localizacao = await consumirFilaRabbitMQ();
+
+    var { id_dispositivo, id_localizacao, latitude, longitude } = localizacao;
 
     // Verificar se o dispositivo existe e está ativo
     const dispositivo = await getDispositivoById(id_dispositivo);
@@ -229,28 +250,36 @@ app.post('/salvar-localizacao/:id_dispositivo', async (req, res) => {
       return res.status(404).json({ error: 'Dispositivo não encontrado ou inativo' });
     }
 
-    const localizacao = await consumirFilaRabbitMQ();
+    // const ultimaLocalizacao = await getUltimaLocalizacao(id_dispositivo);
 
-    const { id_localizacao, latitude, longitude } = localizacao;
+    // var distancia = 0;
 
-    const ultimaLocalizacao = await getUltimaLocalizacao(id_dispositivo);
+    // if (ultimaLocalizacao) {
+    //   // Calcula a distância usando a fórmula de Haversine
+    //   var distancia = geolib.getDistance(
+    //     { latitude: ultimaLocalizacao.latitude, longitude: ultimaLocalizacao.longitude },
+    //     { latitude, longitude } 
+    //   ) / 1000;
+    // }
 
-    var distancia = 0;
+    // // Salvar no banco de dados
+    // const localizacaoSalva = await saveLocalizacao(id_localizacao, id_dispositivo, latitude, longitude, distancia);
 
-    if (ultimaLocalizacao) {
-      // Calcula a distância usando a fórmula de Haversine
-      var distancia = geolib.getDistance(
-        { latitude: ultimaLocalizacao.latitude, longitude: ultimaLocalizacao.longitude },
-        { latitude, longitude } 
-      ) / 1000;
-    }
+    // Enviar para a API de Métricas usando gRPC
+    const grpcLocalizacao = {
+      id: id_localizacao,
+      idDispositivo: id_dispositivo,
+      latitude: latitude,
+      longitude: longitude,
+    };
 
-    // Salvar no banco de dados
-    const localizacaoSalva = await saveLocalizacao(id_localizacao, id_dispositivo, latitude, longitude, distancia);
-
-    console.log(`Localização salva no banco de dados para dispositivo: ${id_dispositivo}`);
-    // Enviar para a API de Métricas
-    // enviarLocalizacaoParaMetrics(id_dispositivo, latitude, longitude, 'apple');
+    metricsClient.RegistrarLocalizacao(grpcLocalizacao, (error, response) => {
+      if (!error) {
+        console.log('Localização registrada com sucesso na API de Métricas');
+      } else {
+        console.error('Erro ao registrar localização:', error.message);
+      }
+    });
 
     res.status(200).json({ message: 'Localização recebida com sucesso' });
   } catch (error) {
@@ -428,7 +457,29 @@ async function deleteDispositivo(id_dispositivo) {
 }
 
 // Obter todos os dispositivos
-async function getAllDispositivos() {
+async function getAllDispositivos(req, res) {
+  try {
+    // Verificar se está no cache
+    if (req.app.locals.cache && req.app.locals.cache.allDispositivos) {
+      console.log('Obtendo todos os dispositivos do cache.');
+      return req.app.locals.cache.allDispositivos;
+    }
+
+    // Se não estiver no cache, buscar no banco de dados
+    const dispositivos = await fetchAllDispositivosFromDB();
+
+    // Armazenar no cache
+    req.app.locals.cache.allDispositivos = dispositivos;
+
+    return dispositivos;
+  } catch (error) {
+    console.error('Erro ao obter todos os dispositivos:', error.message);
+    res.status(500).json({ error: 'Erro interno do servidor' });
+  }
+}
+
+// Função para buscar todos os dispositivos no banco de dados
+async function fetchAllDispositivosFromDB() {
   return new Promise((resolve, reject) => {
     db.all('SELECT * FROM Dispositivo', (err, rows) => {
       if (err) {

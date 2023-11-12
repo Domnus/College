@@ -18,6 +18,11 @@ function getRandomCoordinate() {
     return { latitude, longitude };
 }
 
+dispositivos = [
+    "160c6b24-9682-41df-9b8d-4d79f53df0c7",
+    "601a0205-479b-43f1-822e-1692e3f7f873"
+]
+
 // Cria um cliente MQTT
 const client = mqtt.connect(mqttBroker);
 
@@ -33,14 +38,17 @@ client.on('connect', () => {
         // Gera latitude e longitude aleatórias
         const coordenadas = getRandomCoordinate();
 
+        // Escolhe um dispositivo aleatório
+        const idDispositivo = dispositivos[Math.floor(Math.random() * dispositivos.length)];
+
         // Monta o payload JSON
-        const payload = JSON.stringify({ id, coordenadas });
+        const payload = JSON.stringify({ idDispositivo, id, coordenadas });
 
         // Publica as informações no tópico MQTT
         client.publish(mqttTopic, payload, { qos: 1 });
 
         console.log(`Informações publicadas: ${payload}`);
-    }, 10000);
+    }, 3000);
 });
 
 // Lidar com erros de conexão MQTT
